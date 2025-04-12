@@ -1,5 +1,5 @@
-import Header from "@/app/ui/pages/header";
-import WishlistCard from "@/app/ui/pages/wishlist_card";
+import Header from "@/app/ui/component/header";
+import WishlistCard from "@/app/ui/component/wishlist_card";
 
 export default function Wishlist() {
   return (

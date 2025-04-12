@@ -1,23 +1,15 @@
 "use client";
 
-import Carousel from "./ui/home/carousel";
-import CategoriesCard from "./ui/home/categories_card";
-import Card2 from "./ui/home/card2";
-import ProductCard from "./ui/home/product_card";
-import { FaAngleUp } from "react-icons/fa";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import CheckStatus from "./ui/home/check_status";
-import FeaturedSection from "./ui/home/featured_section";
+import { FaAngleUp } from "react-icons/fa";
+import Carousel from "./ui/component/carousel";
+import CategoriesCard from "./ui/component/categories_card";
+import Card2 from "./ui/component/card2";
+import ProductCard from "./ui/component/product_card";
+import CheckStatus from "./ui/component/check_status";
+import FeaturedSection from "./ui/component/featured_section";
 
-import { Swiper, SwiperSlide } from "swiper/react";
-
-import "swiper/css";
-import "swiper/css/effect-fade";
-import "swiper/css/pagination";
-import "swiper/css/scrollbar";
-
-import { FreeMode, Autoplay, Keyboard, Scrollbar } from "swiper/modules";
 
 export default function Home() {
   const [showButton, setShowButton] = useState(false);

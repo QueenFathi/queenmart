@@ -1,7 +1,7 @@
 "use client";
 
 import { IoCloseOutline } from "react-icons/io5";
-import ProductCard from "../home/product_card";
+import ProductCard from "../component/product_card";
 
 export default function WishlistCard() {
   return (

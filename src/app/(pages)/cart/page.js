@@ -1,4 +1,4 @@
-import Header from "@/app/ui/pages/header";
+import Header from "@/app/ui/component/header";
 
 export default function Cart () {
      return (

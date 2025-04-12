@@ -1,7 +1,7 @@
 "use client";
 
-import ProductCard from "@/app/ui/home/product_card";
-import ReviewCard from "@/app/ui/pages/reviewcard";
+import ProductCard from "@/app/ui/component/product_card";
+import ReviewCard from "@/app/ui/component/reviewcard";
 import { Radio, RadioGroup } from "@headlessui/react";
 import { StarIcon } from "@heroicons/react/20/solid";
 import Image from "next/image";
@@ -20,6 +20,7 @@ const product = {
   href: "#",
   imageSrc: "/heel.jpg",
   imageAlt: "Two each of gray, white, and black shirts arranged on table.",
+  description: "Two each of gray, white, and black shirts arranged on table.",
   colors: [
     { name: "White", class: "bg-white", selectedClass: "ring-gray-400" },
     { name: "Gray", class: "bg-gray-200", selectedClass: "ring-gray-400" },
@@ -37,16 +38,57 @@ const product = {
   ],
   stock: 2,
 };
+ const ShippingData = () => { 
+  return (
+    <p className=" pt-5">
+      Diam amet duo labore stet elitr ea clita ipsum, tempor labore
+      accusam ipsum et no at. Kasd diam tempor rebum magna dolores sed
+      sed eirmod ipsum.
+      <br />
+      Diam amet duo labore stet elitr ea clita ipsum, tempor labore
+      accusam ipsum et no at. Kasd diam tempor rebum magna dolores sed
+      sed eirmod ipsum.
+      <br />
+      Diam amet duo labore stet elitr ea clita ipsum, tempor labore
+      accusam ipsum et no at. Kasd diam tempor rebum magna dolores sed
+      sed eirmod ipsum.
+      <br />
+      Diam amet duo labore stet elitr ea clita ipsum, tempor labore
+      accusam ipsum et no at. Kasd diam tempor rebum magna dolores sed
+      sed eirmod ipsum.
+      <br />
+      Diam amet duo labore stet elitr ea clita ipsum, tempor labore
+      accusam ipsum et no at. Kasd diam tempor rebum magna dolores sed
+      sed eirmod ipsum.
+      <br />
+      Diam amet duo labore stet elitr ea clita ipsum, tempor labore
+      accusam ipsum et no at. Kasd diam tempor rebum magna dolores sed
+      sed eirmod ipsum.
+      <br />
+      Diam amet duo labore stet elitr ea clita ipsum, tempor labore
+      accusam ipsum et no at. Kasd diam tempor rebum magna dolores sed
+      sed eirmod ipsum.
+      <br />
+      Diam amet duo labore stet elitr ea clita ipsum, tempor labore
+      accusam ipsum et no at. Kasd diam tempor rebum magna dolores sed
+      sed eirmod ipsum.
+      <br />
+    </p>
+  )
+ }
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 export default function ProductDetail() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState(null);
   const [selectedColor, setSelectedColor] = useState(product.colors[0]);
   const [selectedSize, setSelectedSize] = useState(product.sizes[2]);
   const [quantity, setQuantity] = useState(1);
+  const toggleTab = (index) => {
+    setActiveTab(activeTab === index ? null : index)
+  }
 
   const increaseQuantity = () => {
       setQuantity((prev) => prev + 1)
@@ -83,13 +125,13 @@ export default function ProductDetail() {
                   <span className="text-xl text-stone-500 line-through pe-3">
                     #{product.price}
                   </span>{" "}
-                  <span className="text-2xl text-gray-900">
+                  <span className="text-2xl text-stone-900 font-semibold">
                     {" "}
                     #{(product.price * product.discount) / 100}
                   </span>
                 </p>
               ) : (
-                <p className="text-2xl text-stone-900"># {product.price}</p>
+                <p className="text-2xl text-stone-900 font-semibold"># {product.price}</p>
               )}
               <div className="mt-6">
                 <h4 className="sr-only">Reviews</h4>
@@ -226,7 +268,7 @@ export default function ProductDetail() {
                 <div className="flex items-center gap-10 mt-6">
                   <button
                     type="submit"
-                    className="flex gap-3 w-1/2 items-center justify-center bg-purple-500 px-8 py-3 text-base font-medium text-white hover:bg-purple-400 focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:outline-hidden"
+                    className="flex gap-3 w-1/2 items-center justify-center bg-purple-500 px-8 py-3 text-base font-medium text-white transition-transform duration-200 transform hover:scale-105 focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:outline-hidden"
                   >
                     Add to bag <IoBagAdd />
                   </button>
@@ -239,7 +281,7 @@ export default function ProductDetail() {
                 <h1 className="font-semibold">Category:</h1>
                 <p>Fashion</p>
               </div>
-              <div className="mt-3 flex gap-3 items-center">
+              <div className="mt-3 flex gap-4 items-center">
                 <h1 className="font-semibold">Share:</h1>
                 <Link href="">
                   <FaFacebookF />{" "}
@@ -257,92 +299,21 @@ export default function ProductDetail() {
             </section>
           </div>
         </div>
-        <div className="py-10 border-b border-stone-200">
+        {[{title:"Description", data:product.description}, {title:"Shipping", data: <ShippingData />}, {title:"Returns", data: <ShippingData />}].map((d, index) => (
+        <div className="py-10 border-b border-stone-200" key={index}>
           <div className="flex justify-between items-center">
-            <h1 className="font-semibold text-lg md:text-2xl">Description</h1>
-            <button onClick={() => setIsOpen(!isOpen)}>
+            <h1 className="font-semibold text-lg md:text-2xl">{d.title}</h1>
+            <button onClick={() => toggleTab(index)}>
               <FaAngleDown
                 className={`w-8 h-8 p-2 transition-transform duration-300 ${
-                  isOpen && "rotate-180"
+                  activeTab === index && "rotate-180"
                 }`}
               />
             </button>
           </div>
-          {isOpen && (
-            <p className=" pt-5">
-              Diam amet duo labore stet elitr ea clita ipsum, tempor labore
-              accusam ipsum et no at. Kasd diam tempor rebum magna dolores sed
-              sed eirmod ipsum.
-              <br />
-              Diam amet duo labore stet elitr ea clita ipsum, tempor labore
-              accusam ipsum et no at. Kasd diam tempor rebum magna dolores sed
-              sed eirmod ipsum.
-              <br />
-              Diam amet duo labore stet elitr ea clita ipsum, tempor labore
-              accusam ipsum et no at. Kasd diam tempor rebum magna dolores sed
-              sed eirmod ipsum.
-              <br />
-              Diam amet duo labore stet elitr ea clita ipsum, tempor labore
-              accusam ipsum et no at. Kasd diam tempor rebum magna dolores sed
-              sed eirmod ipsum.
-              <br />
-              Diam amet duo labore stet elitr ea clita ipsum, tempor labore
-              accusam ipsum et no at. Kasd diam tempor rebum magna dolores sed
-              sed eirmod ipsum.
-              <br />
-              Diam amet duo labore stet elitr ea clita ipsum, tempor labore
-              accusam ipsum et no at. Kasd diam tempor rebum magna dolores sed
-              sed eirmod ipsum.
-              <br />
-              Diam amet duo labore stet elitr ea clita ipsum, tempor labore
-              accusam ipsum et no at. Kasd diam tempor rebum magna dolores sed
-              sed eirmod ipsum.
-              <br />
-              Diam amet duo labore stet elitr ea clita ipsum, tempor labore
-              accusam ipsum et no at. Kasd diam tempor rebum magna dolores sed
-              sed eirmod ipsum.
-              <br />
-            </p>
-          )}
+          {activeTab === index && d.data}
         </div>
-        <div className="py-10 border-b border-stone-200">
-          <div className="flex justify-between items-center">
-            <h1 className="font-semibold text-lg md:text-2xl">Shipping</h1>
-            <button onClick={() => setIsOpen(!isOpen)}>
-              <FaAngleDown
-                className={`w-8 h-8 p-2 transition-transform duration-300 ${
-                  isOpen && "rotate-180"
-                }`}
-              />
-            </button>
-          </div>
-          {isOpen && (
-            <ul className="text-base lg:text-lg list-disc pt-5 ps-10">
-              <li>Free Shipping on orders over #100, 000</li>
-              <li>International shipping available</li>
-              <li> Expdited shipping options</li>
-              <li>Signature required upon delivery</li>
-            </ul>
-          )}
-        </div>
-        <div className="py-10 border-b border-stone-200">
-          <div className="flex justify-between items-center">
-            <h1 className="font-semibold text-lg md:text-2xl">Returns</h1>
-            <button onClick={() => setIsOpen(!isOpen)}>
-              <FaAngleDown
-                className={`w-8 h-8 p-2 transition-transform duration-300 ${
-                  isOpen && "rotate-180"
-                }`}
-              />
-            </button>
-          </div>
-          {isOpen && (
-            <ul className="text-base lg:text-lg list-disc pt-5 ps-10">
-              <li>Easy return requests</li>
-              <li>60 day return window</li>
-            </ul>
-          )}
-        </div>
+        ))}
         <div className="pt-10">
           <div className="py-8 flex gap-2">
             <span className="w-2 bg-purple-500"></span>
@@ -363,7 +334,10 @@ export default function ProductDetail() {
         </div>
 
         <div className="py-20">
-          <h1 className="font-semibold text-2xl">Product Ratings & Reviews</h1>
+          <div className="flex justify-between">
+            <h1 className="font-semibold text-2xl">Product Ratings & Reviews</h1>
+            <Link href="" className="text-base md:text-lg text-stone-800 hover:underline hover:text-purple-500">See more &gt;</Link>
+          </div>
           <div className="mt-10">
             {[...Array(3)].map((_, index) => (
                   <ReviewCard key={index} />

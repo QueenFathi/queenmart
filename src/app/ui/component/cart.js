@@ -55,10 +55,14 @@ const bagItem = [
 
 export default function Cart({ openCart, onCloseCart }) {
   return (
+    <>
+    {/* Overlay */}
+    <div className={`fixed inset-0 bg-black/50 z-40 transition-opacity duration-300 ${openCart ? "opacity-100 pointer-events-auto": "opacity-0 pointer-events-none overflow-y-hidden"}`} onClick={onCloseCart}/>
+
     <div
       className={`${
         openCart ? "translate-x-0" : "translate-x-full"
-      } fixed z-50 transition-transform duration-300 w-full h-full overflow-y-auto [&::-webkit-scrollbar]:hidden scrollbar-none bg-white py-10`}
+      } fixed top-0 right-0 z-50 transition-transform duration-500 ease-out w-full max-w-[400px] h-full overflow-y-auto [&::-webkit-scrollbar]:hidden scrollbar-none bg-white py-10`}
     >
       <div>
         <div className="flex justify-between px-10">
@@ -123,5 +127,6 @@ export default function Cart({ openCart, onCloseCart }) {
         </div>
       </div>
     </div>
+    </>
   );
 }

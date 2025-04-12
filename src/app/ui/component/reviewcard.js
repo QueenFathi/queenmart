@@ -5,7 +5,7 @@ import { IoPersonCircleOutline } from "react-icons/io5"
 
 export default function ReviewCard () {
     return (
-       <div className="mt-5 flex gap-5 g:gap-10 items-start">
+       <div className="mt-5 flex gap-5 g:gap-10 items-start shadow p-5">
         <div className="flex items-center space-x-4">
             {/* <Image src="/heel.jpg" width={100} height={100} className="w-12 h-12" alt="user avatar" /> */}
             <span className="text-5xl"><IoPersonCircleOutline /></span>

@@ -1,11 +1,9 @@
-import Header from "@/app/ui/pages/header";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function About () {
     return (
        <div className="py-16 md:py-20">
-        {/* <Header title={"About Us"} /> */}
            <section className="container px-5 mx-auto flex flex-col md:flex-row items-center gap-10">
                <div className="md:w-1/2">
                     <Image src="/card2img2.png" width={1000} height={1000} alt="about us image" className="w-full" />

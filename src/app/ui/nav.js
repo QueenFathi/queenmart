@@ -1,6 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
+import clsx from "clsx";
 import {
   IoBagOutline,
   IoCloseOutline,
@@ -8,13 +12,9 @@ import {
   IoPersonOutline,
   IoSearchOutline,
 } from "react-icons/io5";
-import Image from "next/image";
-import { usePathname } from "next/navigation";
-import Link from "next/link";
-import clsx from "clsx";
-import Cart from "./pages/cart";
-import HomeSideBar from "./home/home_sidebar";
-import SearchBar from "./home/search_bar";
+import Cart from "./component/cart";
+import HomeSideBar from "./component/home_sidebar";
+import SearchBar from "./component/search_bar";
 
 
 
@@ -26,6 +26,10 @@ export default function Navbar() {
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isAtFooter, setIsAtFooter] = useState(false);
   const pathname = usePathname();
+
+  const updateBodyOverflow = (s1, s2, s3) => {
+    document.body.style.overflow = s1 || s2 || s3 ? "hidden" : "auto"
+  }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -70,7 +74,7 @@ export default function Navbar() {
           <div className="lg:hidden flex flex-end">
             <button
               className="flex items-center md:px-3 py-2 rounded text-gray-200 hover:text-gray-400"
-              onClick={() => setIsOpenSideBar(!isOpenSideBar)}
+              onClick={() => {setIsOpenSideBar(!isOpenSideBar); updateBodyOverflow(!isOpenSideBar, openSearchBar, openCart)}}
             >
               {isOpenSideBar ? (
                 <p className="text-stone-700 flex items-center">
@@ -144,7 +148,7 @@ export default function Navbar() {
             <div className="relative">
               <button
                 className="text-3xl"
-                onClick={() => setOpenSearchBar(!openSearchBar)}
+                onClick={() => {setOpenSearchBar(!openSearchBar); updateBodyOverflow(isOpenSideBar, !openSearchBar, openCart)}}
               >
                 {openSearchBar ? <IoCloseOutline /> : <IoSearchOutline />}
               </button>
@@ -158,7 +162,7 @@ export default function Navbar() {
             <div className="relative">
               <button
                 className="text-3xl"
-                onClick={() => setOpenCart(!openCart)}
+                onClick={() => {setOpenCart(!openCart); updateBodyOverflow(isOpenSideBar, openSearchBar, true)}}
               >
                 <IoBagOutline />
                 <span className="absolute top-0 -right-1 px-1 rounded-full bg-purple-300 text-xs text-white">
@@ -169,9 +173,9 @@ export default function Navbar() {
           </div>
         </div>
       </nav>
-      <HomeSideBar isOpenSideBar={isOpenSideBar} pathname={pathname} onClose={() => setIsOpenSideBar(!isOpenSideBar)} />
+      <HomeSideBar isOpenSideBar={isOpenSideBar} pathname={pathname} onClose={() => {setIsOpenSideBar(!isOpenSideBar); updateBodyOverflow(false, openSearchBar, openCart)}} />
       <SearchBar openSearchBar={openSearchBar} />
-      <Cart openCart={openCart} onCloseCart={() => setOpenCart(!openCart)}/>
+      <Cart openCart={openCart} onCloseCart={() => {setOpenCart(!openCart); updateBodyOverflow(isOpenSideBar, openSearchBar, false)}}/>
     </div>
   );
 }

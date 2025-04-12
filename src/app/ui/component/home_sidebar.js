@@ -3,6 +3,10 @@ import Link from "next/link";
 
 export default function HomeSideBar({ isOpenSideBar, pathname, onClose }) {
   return (
+    <>
+    {/* Overlay */}
+    <div className={`fixed inset-0 bg-black/50 z-20 transition-opacity duration-300 ${isOpenSideBar ? "opacity-100 pointer-events-auto": "opacity-0 pointer-events-none overflow-y-hidden"}`} onClick={onClose}/>
+
     <div
       className={`${
         isOpenSideBar ? "-translate-x-0" : "-translate-x-full"
@@ -29,20 +33,21 @@ export default function HomeSideBar({ isOpenSideBar, pathname, onClose }) {
           </Link>
         ))}
         <div className="absolute bottom-28 w-full px-10">
-          <div className="flex justify-center gap-5">
-            <button className="py-3 text-white bg-purple-500 hover:bg-purple-400  w-full focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:outline-hidden">
-              <Link className="px-8 mx-2" href="/login">
+          <div className="flex gap-5">
+            <Link className="w-full" href="/login" onClick={onClose}>
+              <button className="py-3 w-full text-white bg-purple-500 transition-transform duration-200 transform hover:scale-105 focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:outline-hidden">
                 LOG IN
-              </Link>
-            </button>
-            <button className="py-3 text-white bg-purple-500 hover:bg-purple-400  w-full focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:outline-hidden">
-              <Link className="px-8 mx-2" href="/register">
+              </button>
+            </Link>
+            <Link className="w-full" href="/register" onClick={onClose}>
+              <button className="py-3 w-full text-white bg-purple-500 transition-transform duration-200 transform hover:scale-105 focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:outline-hidden">
                 REGISTER
-              </Link>
-            </button>
+              </button>
+            </Link>
           </div>
         </div>
       </div>
     </div>
+    </>
   );
 }

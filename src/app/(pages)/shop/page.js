@@ -1,13 +1,12 @@
 "use client";
 
-import ProductCard from "@/app/ui/home/product_card";
-import Header from "@/app/ui/pages/header";
-import Pagination from "@/app/ui/pages/pagination";
-import ShopFilterSidebar from "@/app/ui/pages/shop_filter_sidebar";
-import SmallProductCard from "@/app/ui/small_product_card";
+import ProductCard from "@/app/ui/component/product_card";
+import Header from "@/app/ui/component/header";
+import Pagination from "@/app/ui/component/pagination";
+import ShopFilterSidebar from "@/app/ui/component/shop_filter_sidebar";
+import SmallProductCard from "@/app/ui/component/small_product_card";
 import { useState } from "react";
 import { HiMenuAlt2 } from "react-icons/hi";
-import { IoCloseOutline } from "react-icons/io5";
 
 export default function Shop() {
   const [openBar, setOpenBar] = useState(false);

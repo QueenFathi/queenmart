@@ -1,5 +1,5 @@
 import { IoCloseOutline } from "react-icons/io5";
-import SmallProductCard from "../small_product_card";
+import SmallProductCard from "../component/small_product_card";
 
 export default function ShopFilterSidebar ({openBar, onClose}) {
     return (

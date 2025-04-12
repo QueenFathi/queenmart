@@ -1,4 +1,4 @@
-import Header from "@/app/ui/pages/header";
+import Header from "@/app/ui/component/header";
 import { FaEnvelope, FaMapMarkerAlt, FaPhoneAlt } from "react-icons/fa";
 
 const faq = [
