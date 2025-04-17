@@ -99,7 +99,7 @@ export default function ProductDetail() {
 
   return (
     <div>
-      <div className="container mx-auto py-16 md:py-20 px-5">
+      <div className="container mx-auto py-16 md:py-20 px-2">
         <div className="flex gap-3 py-10 text-base md:text-lg">
           <Link href="/">Home</Link> \<Link href="/shop">Shop</Link> \
           <Link href="text-stone-700">{product.name}</Link>

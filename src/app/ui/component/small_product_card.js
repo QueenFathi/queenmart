@@ -21,7 +21,7 @@ export default function SmallProductCard() {
             width={400}
             height={400}
             alt={item.imageAlt}
-            className="w-full h-24 sm:h-32 md:h-40 object-cover"
+            className="!w-full h-24 sm:h-32 md:h-40 object-cover"
           />
         </div>
         <div className="flex flex-1 flex-col gap-3 justify-center">

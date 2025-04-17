@@ -12,7 +12,7 @@ export default function CheckStatus () {
               <h3 className="font-semibold text-xl sm:text-3xl">
                 WORRIED ABOUT YOUR ORDER?
               </h3>
-              <p>
+              <p className="text-center">
                 Click on the button below and check the status of your order
               </p>
               <Link href="">

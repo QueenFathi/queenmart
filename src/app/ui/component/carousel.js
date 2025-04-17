@@ -10,6 +10,7 @@ import "swiper/css/effect-fade";
 
 import { Autoplay, EffectFade} from "swiper/modules";
 import Image from "next/image";
+import Link from "next/link";
 
 const cardata = [
   {
@@ -67,9 +68,9 @@ export default function Carousel() {
               <div className="absolute inset-0 bg-black text-white bg-opacity-30 flex  flex-col text-center gap-5 items-center justify-center">
                 <h1 className="text-3xl md:text-6xl font-extrabold">{item.text}</h1>
                 <p>{item.smalltext}</p>
-                <button className="bg-purple-500 w-auto py-3 px-5">
+                <Link href="/shop"><button className="bg-purple-500 w-auto py-3 px-5">
                   SHOP NOW
-                </button>
+                </button></Link>
               </div>
             </div>
           </SwiperSlide>

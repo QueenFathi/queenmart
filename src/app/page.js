@@ -39,8 +39,8 @@ export default function Home() {
       )}
       <main>
         <Carousel />
-        <div className="container mx-auto py-16 md:py-20 px-5">
-          <div className="flex items-center justify-between px-0 sm:px-5 py-5">
+        <div className="container mx-auto py-16 md:py-20 px-2">
+          <div className="flex items-center justify-between px-0 sm:px-2 py-5">
             <h1 className="text-2xl sm:text-3xl font-bold">Popular items</h1>
             <Link
               href=""
@@ -50,7 +50,7 @@ export default function Home() {
             </Link>
           </div>
           <div className="w-full overflow-hidden">
-            <div className="flex overflow-x-auto scroll-smooth scrollbar-thin scrollbar-thumb-gray-200 scrollbar-track-gray-50 snap-x snap-mandatory space-x-4 p-4">
+            <div className="flex overflow-x-auto scroll-smooth scrollbar-thin scrollbar-thumb-gray-200 scrollbar-track-gray-50 snap-x snap-mandatory space-x-2">
               {[...Array(12)].map((_, index) => (
               <div key={index} className="snap_start w-[45%] sm:w-[35%] lg:w-[23%] flex-shrink-0 bg-white border">
                 <ProductCard key={index} />
@@ -59,8 +59,8 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="container mx-auto px-5">
-          <div className="px-0 sm:px-5 py-5">
+        <div className="container mx-auto px-2">
+          <div className="py-5">
             <h1 className="text-2xl sm:text-3xl font-bold">
               Browse our Favourite Categories
             </h1>
@@ -85,7 +85,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="container mx-auto py-20 px-5">
+        <div className="container mx-auto py-20 px-2">
           <div className="text-center">
             <h2 className="text-2xl md:text-3xl font-bold flex gap-3 items-center justify-center">
               <span className="bg-black h-1 w-10 md:w-20"></span>
@@ -98,13 +98,13 @@ export default function Home() {
               </Link>
             </p>
           </div>
-          <div className="pt-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-5 gap-y-10 lg:gap-10">
+          <div className="pt-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-3 gap-y-5 lg:gap-10">
           {[...Array(8)].map((_, index) => (
                 <ProductCard key={index} />
             ))}
           </div>
         </div>
-        <div className="container mx-auto px-5">
+        <div className="container mx-auto px-2">
           <div className="text-center">
             <h2 className="text-2xl md:text-3xl font-bold flex gap-3 items-center justify-center">
               <span className="bg-black h-1 w-10 md:w-20"></span>
@@ -117,7 +117,7 @@ export default function Home() {
               </Link>
             </p>
           </div>
-          <div className="pt-10 grid grid-cols-2 md:grid-cols-4 gap-10">
+          <div className="pt-10 grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-10">
             <CategoriesCard img={"/heel.jpg"} category={"Shoes"} href={""} />
             <CategoriesCard img={"/car3.png"} category={"Bags"} href={""} />
             <CategoriesCard
@@ -132,7 +132,7 @@ export default function Home() {
             />
           </div>
         </div>
-        <div className="container mx-auto py-20 px-5">
+        <div className="container mx-auto py-20 px-2">
           <div className="text-center">
             <h2 className="text-2xl md:text-3xl font-bold flex gap-3 items-center justify-center">
               <span className="bg-black h-1 w-10 md:w-20"></span>
@@ -145,7 +145,7 @@ export default function Home() {
               </Link>
             </p>
           </div>
-          <div className="pt-10 grid grid-cols-2 md:grid-cols-4 gap-x-5 gap-y-10 lg:gap-10">
+          <div className="pt-10 grid grid-cols-2 md:grid-cols-4 gap-x-3 gap-y-5 lg:gap-10">
           {[...Array(8)].map((_, index) => (
                 <ProductCard key={index} />
             ))}

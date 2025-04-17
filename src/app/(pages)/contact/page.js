@@ -48,7 +48,7 @@ export default function Contact() {
   return (
     <div className="py-16 md:py-20">
       <Header title={"Contact"} />
-      <div className="container mx-auto px-5 py-14">
+      <div className="container mx-auto px-2 py-14">
         <div>
             <h3 className="text-3xl font-semibold">Frequently Asked Questions</h3>
             <p className="py-5 text-lg">Have a different question and can't find the answer you're lookig for? Send usa message and we'll get back to you as soon as we can</p>
@@ -62,7 +62,7 @@ export default function Contact() {
             ))}
         </div>
       </div>
-      <div className="container px-5 mx-auto">
+      <div className="container px-2 mx-auto">
         <h3 className="text-3xl font-semibold">Write us a Message</h3>
         <div className="grid grid-cols-1 md:grid-cols-12 gap-5 mt-10">
           <div className="col-span-7">
@@ -118,14 +118,14 @@ export default function Contact() {
               ></iframe>
             </div>
             <div className="bg-light p-5 mb-3">
-              <p className="mb-2 flex items-center gap-5 text-base sm:text-lg">
+              <p className="mb-2 flex items-center gap-5 text-lg">
                 <FaMapMarkerAlt className="text-purple-500"/> 10, Road 17, Agara Estate, Odo-Ona Elewe,
                 Ibadan, Oyo State, Nigeria
               </p>
-              <p className="mb-2 flex items-center gap-5 text-base sm:text-lg">
+              <p className="mb-2 flex items-center gap-5 text-lg">
                 <FaEnvelope className="text-purple-500"/> fathiat477odutayo@gmail.com
               </p>
-              <p className="mb-2 flex items-center gap-5 text-base sm:text-lg">
+              <p className="mb-2 flex items-center gap-5 text-lg">
                 <FaPhoneAlt className="text-purple-500"/> +2348089684723 +2349036332486
               </p>
             </div>

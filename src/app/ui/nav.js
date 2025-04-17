@@ -70,7 +70,7 @@ export default function Navbar() {
           showNavbar && !isAtFooter ? "translate-y-0" : "-translate-y-full"
         } fixed top-0 w-full z-40 transition-transform duration-300 bg-white shadow-sm`}
       >
-        <div className="flex justify-between items-center mx-auto container px-5 py-2 xl:py-8">
+        <div className="flex justify-between items-center mx-auto container px-2 py-2 xl:py-8">
           <div className="lg:hidden flex flex-end">
             <button
               className="flex items-center md:px-3 py-2 rounded text-gray-200 hover:text-gray-400"
