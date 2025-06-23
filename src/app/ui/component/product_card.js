@@ -81,7 +81,7 @@ export default function ProductCard() {
             className="object-cover w-full transform group-hover:scale-105 transition-transform duration-1000"
           ></Image>
           <div className="hidden absolute bottom-0 right-0 left-0 bg-purple-500 sm:flex gap-3 items-center justify-center transform translate-y-full group-hover:translate-y-0 transition-all duration-300">
-            <button className="flex justify-center items-center gap-2 text-white bg-purple-500 w-full py-2 md:py-4 px-5 text-base md:text-lg">
+            <button className="flex justify-center items-center gap-2 text-white bg-purple-500 hover:bg-black hover-text-white w-full py-2 md:py-4 px-5 text-base md:text-lg">
                 Add to Bag <IoBagAdd />
             </button>
           </div>
@@ -96,7 +96,7 @@ export default function ProductCard() {
           </div>
         </div>
         </Link>
-        <button className="w-11/12 mx-auto py-1.5 sm:py-2 bg-purple-500 hover:bg-purple-400 hover:font-bold hover:text-black text-sm text-white sm:text-base flex justify-center items-center gap-2 sm:hidden">
+        <button className="w-11/12 mx-auto py-1.5 sm:py-2 bg-purple-500 hover:bg-black hover:font-bold text-sm text-white sm:text-base flex justify-center items-center gap-2 sm:hidden">
           Add to Bag <IoBagAdd />
         </button>
       </div>
@@ -284,7 +284,7 @@ export default function ProductCard() {
                           </div>
                         <button
                           type="submit"
-                          className="flex gap-3 w-full items-center justify-center border border-transparent bg-purple-500 px-8 py-3 text-base font-medium text-white hover:bg-purple-400 focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:outline-hidden"
+                          className="flex gap-3 w-full items-center justify-center border border-transparent bg-purple-500 px-8 py-3 text-base font-medium text-white hover:bg-black focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:outline-hidden"
                         >
                           Add to bag <IoBagAdd />
                         </button>

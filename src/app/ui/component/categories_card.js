@@ -17,7 +17,7 @@ export default function CategoriesCard({img, category, href}) {
         </div>
         <div className="absolute inset-0 bg-black text-white bg-opacity-30 flex flex-col text-center gap-3 items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             <h1 className="text-base sm:text-xl font-semibold">{category}</h1>
-              <button className="bg-purple-500 w-auto py-1 px-3 text-sm sm:text-base">
+              <button className="bg-purple-500 hover:bg-black w-auto py-1 px-3 text-sm sm:text-base">
                 SHOP NOW
               </button>
           </div>

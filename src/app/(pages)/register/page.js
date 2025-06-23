@@ -54,7 +54,7 @@ export default function Register() {
                     <div className="mt-5">
                         <button
                             type="submit"
-                            className="w-full py-2 px-4 bg-purple-500 text-white rounded-md hover:font-semibold transition-transform duration-200 transform hover:scale-105"
+                            className="w-full py-2 px-4 bg-purple-500 text-white hover:font-semibold transition-transform duration-200 transform hover:scale-105"
                         >
                             Register Now
                         </button>

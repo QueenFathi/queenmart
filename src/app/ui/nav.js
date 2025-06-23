@@ -44,7 +44,7 @@ export default function Navbar() {
         setShowNavbar(false);
       }
 
-      if (currentScrollY == 0) {
+      if (currentScrollY <= 1) {
         setShowNavbar(true);
       }
 
