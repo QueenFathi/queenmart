@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { IoCloseOutline } from "react-icons/io5";
 
 const bagItem = [
@@ -76,15 +77,13 @@ export default function Cart({ openCart, onCloseCart }) {
         <div className="py-10 flex flex-col gap-5 px-10">
           {bagItem.map((item, index) => (
             <div key={index} className="flex gap-y-5 gap-x-10">
-              <div className="shrink-0">
                 <Image
                   src={item.img}
                   width={300}
                   height={300}
                   alt="cart image"
-                  className="w-full h-24 object-cover"
+                  className="w-24 h-24 object-cover"
                 />
-              </div>
               <div className="flex flex-1 flex-col">
                 <div>
                   <div className="flex justify-between">
@@ -119,10 +118,10 @@ export default function Cart({ openCart, onCloseCart }) {
           </div>
           <p className="text-center">
             or{" "}
-            <span className="text-purple-500 hover:text-purple-400">
+            <Link href="/shop" className="text-purple-500 hover:text-purple-400">
               {" "}
               Continue Shopping &rarr;
-            </span>{" "}
+            </Link>{" "}
           </p>
         </div>
       </div>

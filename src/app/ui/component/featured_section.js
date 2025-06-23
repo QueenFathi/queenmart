@@ -25,7 +25,7 @@ export default function FeaturedSection () {
               Our platform is one you can always trust
             </p>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-x-5 gap-y-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-5 gap-y-10 mt-5">
             <Featured
               label={"Fast Delivery"}
               icon={<FaShippingFast />}

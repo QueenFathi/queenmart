@@ -62,7 +62,7 @@ export default function ProductCard() {
 
   return (
     <div>
-      <div className="pb-3 sm:pb-0 shadow">
+      <div className="pb-3 sm:pb-0 hover:shadow-lg shadow sm:shadow-none">
         <div className="relative group overflow-hidden">
           <button className="absolute z-10 top-1 sm:top-4 right-2 sm:right-5 text-base sm:text-2xl  hover:bg-purple-500 bg-white p-1.5 sm:p-3 rounded-full text-stone-700">
             <IoHeartOutline />
