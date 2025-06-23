@@ -17,7 +17,7 @@ export default function About () {
                         Explore our exclusive collections and express yourself through fashion
                     </p>
                     <div className="mt-10">
-                        <Link href="/shop" className="bg-purple-500 text-white px-10 py-3 text-lg font-medium shadow hover:bg-purple-400 transition">Shop now</Link>
+                        <Link href="/shop" className="bg-purple-500 shadow-purple-400 text-white px-10 py-3 text-lg font-medium shadow hover:bg-black transition">Shop now</Link>
                     </div>
                </div>
            </section>
@@ -56,20 +56,16 @@ export default function About () {
                 <div className="max-w-4xl mx-auto">
                     <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">Join Our Fashion Community</h2>
                     <p className="mt-4 text-base sm:text-lg">
-                    Be the first to discover new arrivals, exclusive discounts, and fashion tips. Sign up now and enjoy a **10% discount** on your first order!
+                    Be the first to discover new arrivals, exclusive discounts, and fashion tips. Sign up now and enjoy a <span className="font-semibold">10% discount</span> on your first order!
                     </p>
                     <div className="mt-6 flex flex-col sm:flex-row justify-center gap-4">
-                        <Link
-                            href="/shop"
-                            className="bg-white text-purple-500 px-6 py-3 text-lg font-medium shadow-md hover:bg-gray-100 transition"
-                        >
-                            Shop Now
+                        <Link href="/shop" className="relative shadow-md px-6 py-3 bg-white text-purple-500 group overflow-hidden cursor-pointer">
+                            <span className="absolute top-0 left-0 w-0 h-0 bg-black group-hover:w-full group-hover:h-full transition-all duration-300 ease-in-out" />
+                            <span className="relative z-10 text-lg font-medium group-hover:text-white transition-colors duration-300">Shop Now</span>
                         </Link>
-                        <Link
-                            href="/subscribe"
-                            className="bg-white text-purple-500 px-6 py-3 text-lg font-medium shadow-md hover:bg-purple-100 transition"
-                        >
-                            Subscribe & Save
+                        <Link href="" className="relative shadow-md px-6 py-3 bg-white text-purple-500 group overflow-hidden cursor-pointer">
+                            <span className="absolute top-0 left-0 w-0 h-0 bg-black group-hover:w-full group-hover:h-full transition-all duration-300 ease-in-out" />
+                            <span className="relative z-10 text-lg font-medium group-hover:text-white transition-colors duration-300">Subscibe & Save</span>
                         </Link>
                     </div>
                 </div>

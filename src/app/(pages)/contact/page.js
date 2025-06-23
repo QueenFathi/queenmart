@@ -99,7 +99,7 @@ export default function Contact() {
                   ></textarea>
                 </div>
                 <div>
-                  <button className="bg-purple-500 py-2 px-4 text-white" type="submit">
+                  <button className="bg-purple-500 py-2 px-5 text-white hover:bg-black transition hover:scale-105" type="submit">
                     Send Message
                   </button>
                 </div>

@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 
-const Pagination = ({ totalPages = 5 }) => {
+const Pagination = ({ totalPages = 3 }) => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const goToPreviousPage = () => {

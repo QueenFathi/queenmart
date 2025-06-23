@@ -113,13 +113,13 @@ export default function Footer() {
             </p>
           </div>
           <div>
-            <form className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+            <form className="flex flex-row space-x-2 sm:space-x-4">
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="px-4 py-3 border border-purple-500 bg-white placeholder-black w-full sm:w-auto text-base lg:text-lg"
+                className="px-4 py-3 border border-purple-500 bg-white placeholder-black w-auto text-base lg:text-lg"
               />
-              <button className="bg-purple-500 text-white px-10 py-3 hover:bg-purple-400 w-full sm:w-auto text-base lg:text-lg">
+              <button className="bg-purple-500 text-white px-10 py-3 hover:bg-purple-400 w-auto text-base lg:text-lg">
                 Subscribe
               </button>
             </form>

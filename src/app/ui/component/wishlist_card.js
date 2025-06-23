@@ -9,10 +9,10 @@ export default function WishlistCard() {
     <div className="px-5 shadow py-3">
       <SmallProductCard />
       <div className="flex justify-between items-center border-t mt-3 pt-3">
-      <button className="w-auto py-3 px-5 text-purple-500 font-semibold">
+      <button className="w-auto py-1 sm:py-3 px-2 m:px-5 text-purple-500 font-semibold">
           Remove
         </button>
-        <button className="bg-purple-500 w-auto py-3 px-5 text-white font-semibold">
+        <button className="text-sm sm:text-base bg-purple-500 w-auto py-2 sm:py-3 px-5 text-white font-semibold">
           Add to Cart
         </button>
       </div>

@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function Login() {
   return (
     <div className="flex flex-col gap-y-5 justify-center items-center min-h-screen bg-white">
-      <div className="shadow w-full max-w-md p-3 flex justify-center">
+      <div className="shadow w-full max-w-md p-3 flex justify-center bg-black">
         <Link href="/">
           <Image
             src="/logo.png"
