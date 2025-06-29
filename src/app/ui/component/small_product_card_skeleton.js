@@ -12,7 +12,7 @@ export default function SmallProductCardSkeleton({}) {
       />
       <div className="flex flex-1 flex-col gap-3 justify-center">
         <div className="w-32 h-7 bg-gray-200" />
-        <div className="w-32 h-7 bg-gray-200" />
+        <div className="w-32 h-5 bg-gray-200" />
       </div>
     </div>
   );
