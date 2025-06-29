@@ -1,5 +1,3 @@
-"use client"
-
 import { StarIcon } from "@heroicons/react/20/solid"
 import { IoPersonCircleOutline } from "react-icons/io5"
 

@@ -1,42 +1,24 @@
-"use client";
-
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { FaAngleUp } from "react-icons/fa";
-import Carousel from "./ui/component/carousel";
-import CategoriesCard from "./ui/component/categories_card";
-import Card2 from "./ui/component/card2";
+import Carousel from "./ui/component/home/carousel";
+import CategoriesCard from "./ui/component/home/categories_card";
+import Card2 from "./ui/component/home/card2";
 import ProductCard from "./ui/component/product_card";
-import CheckStatus from "./ui/component/check_status";
-import FeaturedSection from "./ui/component/featured_section";
+import CheckStatus from "./ui/component/home/check_status";
+import FeaturedSection from "./ui/component/home/featured_section";
+import UpButton from "@/app/ui/component/home/up_button"
+import { Suspense } from "react";
+import ProductCardSkeleton from "./ui/component/product_card_skeleton";
+import { getAllProducts } from "./lib/queries";
 
 
-export default function Home() {
-  const [showButton, setShowButton] = useState(false);
+export default async function Home() {
+  const products = await getAllProducts()
+  const popularProducts = products.slice().sort((a, b) => b.reviewcount - a.reviewcount).slice(0, 8);
 
-  useEffect(() => {
-    const handleScrollButtonVisibility = () => {
-      window.scrollY > 300 ? setShowButton(true) : setShowButton(false);
-    };
-    window.addEventListener("scroll", handleScrollButtonVisibility);
 
-    return () => {
-      window.removeEventListener("scroll", handleScrollButtonVisibility);
-    };
-  }, []);
-
-  const handleScrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
   return (
     <div>
-      {showButton && (
-        <div className="fixed bottom-4 right-4 m-3 flex justify-end scroll-to-top bg-purple-500 text-white rounded-full">
-          <button className="z-50 p-2" onClick={handleScrollToTop}>
-            <FaAngleUp />
-          </button>
-        </div>
-      )}
+      <UpButton />
       <main>
         <Carousel />
         <div className="container mx-auto py-16 md:py-20 px-2">
@@ -51,9 +33,11 @@ export default function Home() {
           </div>
           <div className="w-full overflow-hidden">
             <div className="flex overflow-x-auto scroll-smooth scrollbar-thin scrollbar-thumb-gray-200 scrollbar-track-gray-50 snap-x snap-mandatory space-x-2">
-              {[...Array(12)].map((_, index) => (
-              <div key={index} className="snap_start w-[45%] sm:w-[35%] lg:w-[23%] flex-shrink-0 bg-white border">
-                <ProductCard key={index} />
+              {popularProducts.map((product) => (
+              <div key={product.id} className="snap_start w-[45%] sm:w-[35%] lg:w-[23%] flex-shrink-0 bg-white border">
+                <Suspense fallback={<ProductCardSkeleton />}>
+                  <ProductCard product={product} />
+                </Suspense>
               </div>  
             ))}
             </div>
@@ -99,8 +83,10 @@ export default function Home() {
             </p>
           </div>
           <div className="pt-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-3 gap-y-5 lg:gap-10">
-          {[...Array(8)].map((_, index) => (
-                <ProductCard key={index} />
+          {products.slice(0, 8).map((product) => (
+               <Suspense key={product.id} fallback={<ProductCardSkeleton />}>
+                <ProductCard product={product}/>
+                </Suspense> 
             ))}
           </div>
         </div>
@@ -146,8 +132,10 @@ export default function Home() {
             </p>
           </div>
           <div className="pt-10 grid grid-cols-2 md:grid-cols-4 gap-x-3 gap-y-5 lg:gap-10">
-          {[...Array(8)].map((_, index) => (
-                <ProductCard key={index} />
+          {products.filter(p => p.categoryname === "shoes").map((product) => (
+                <Suspense key={product.id} fallback={<ProductCardSkeleton />}>
+                <ProductCard product={product}/>
+                </Suspense> 
             ))}
           </div>
         </div>

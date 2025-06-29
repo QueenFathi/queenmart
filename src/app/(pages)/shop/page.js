@@ -3,18 +3,46 @@
 import ProductCard from "@/app/ui/component/product_card";
 import Header from "@/app/ui/component/header";
 import Pagination from "@/app/ui/component/pagination";
-import ShopFilterSidebar from "@/app/ui/component/shop_filter_sidebar";
+import ShopFilterSidebar from "@/app/ui/component/product/shop_filter_sidebar";
 import SmallProductCard from "@/app/ui/component/small_product_card";
-import { useState } from "react";
+import SmallProductCardSkeleton from "@/app/ui/component/small_product_card_skeleton";
+import { useState, useEffect } from "react";
 import { HiMenuAlt2 } from "react-icons/hi";
+import ProductCardSkeleton from "@/app/ui/component/product_card_skeleton";
 
 export default function Shop() {
   const [openBar, setOpenBar] = useState(false);
-  
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchProducts() {
+      try {
+        const res = await fetch("/api/products");
+        const data = await res.json();
+        setProducts(data);
+      } catch (err) {
+        console.error("Failed to fetch products", err);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchProducts();
+  }, []);
+
+  const popularProducts = products
+    .slice()
+    .sort((a, b) => b.reviewcount - a.reviewcount)
+    .slice(0, 3);
 
   return (
     <div>
-      <ShopFilterSidebar openBar={openBar} onClose={() => setOpenBar(false)} />
+      <ShopFilterSidebar
+        openBar={openBar}
+        onClose={() => setOpenBar(false)}
+        products={popularProducts.slice(0, 3)}
+      />
       <div className="py-16 md:py-20">
         <Header title={"Shop"} />
         <div className="text-center py-5 border-b border-stone-300">
@@ -40,9 +68,13 @@ export default function Shop() {
             </form>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 gap-y-10 lg:gap-10">
-            {[...Array(24)].map((_, index) => (
-              <ProductCard key={index} />
-            ))}
+            {loading
+              ? [...Array(12)].map((_, index) => (
+                  <ProductCardSkeleton key={index} />
+                ))
+              : products.map((product) => (
+                  <ProductCard key={product.id} product={product} />
+                ))}
           </div>
           <Pagination />
           <div className="grid grid-cols-1 md:grid-cols-2">
@@ -52,10 +84,14 @@ export default function Shop() {
                   POPULAR ITEMS
                 </h1>
               </div>
-              <div className=" grid grid-row gap-5">
-                {[...Array(3)].map((_, index) => (
-                  <SmallProductCard key={index} />
-                ))}
+              <div className="grid grid-row gap-5">
+                {loading
+                  ? [...Array(3)].map((_, index) => (
+                      <SmallProductCardSkeleton key={index} />
+                    ))
+                  : popularProducts.map((product) => (
+                      <SmallProductCard key={product.id} product={product} />
+                    ))}
               </div>
             </div>
             <div>
@@ -65,9 +101,15 @@ export default function Shop() {
                 </h1>
               </div>
               <div className=" grid grid-row gap-5">
-                {[...Array(3)].map((_, index) => (
-                  <SmallProductCard key={index} />
-                ))}
+                {loading
+                  ? [...Array(3)].map((_, index) => (
+                      <SmallProductCardSkeleton key={index} />
+                    ))
+                  : products
+                      .slice(0, 3)
+                      .map((product) => (
+                        <SmallProductCard key={product.id} product={product} />
+                      ))}
               </div>
             </div>
           </div>

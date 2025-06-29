@@ -1,6 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
 import { IoCloseOutline } from "react-icons/io5";
+import CartItem from './cart_item'
 
 const bagItem = [
   {
@@ -76,30 +76,7 @@ export default function Cart({ openCart, onCloseCart }) {
         </div>
         <div className="py-10 flex flex-col gap-5 px-10">
           {bagItem.map((item, index) => (
-            <div key={index} className="flex gap-y-5 gap-x-10">
-                <Image
-                  src={item.img}
-                  width={300}
-                  height={300}
-                  alt="cart image"
-                  className="w-24 h-24 object-cover"
-                />
-              <div className="flex flex-1 flex-col">
-                <div>
-                  <div className="flex justify-between">
-                    <h1 className="text-xl font-semibold">{item.name}</h1>
-                    <p className="text-xl font-semibold">#{item.price}</p>
-                  </div>
-                  <p>{item.color}</p>
-                </div>
-                <div className="flex flex-1 items-end justify-between">
-                  <p className="pb-2">Qty {item.quantity}</p>
-                  <button className="border border-stone-200 py-2 px-5 hover:bg-purple-500 hover:text-white">
-                    Remove
-                  </button>
-                </div>
-              </div>
-            </div>
+            <CartItem item={item} key={index} />
           ))}
         </div>
         <div className="px-10 pt-10 w-full">
@@ -110,15 +87,21 @@ export default function Cart({ openCart, onCloseCart }) {
             </div>
             <p className="text-xl font-semibold">#10000</p>
           </div>
-          <div className="py-3">
-            <button className="w-full bg-purple-500 text-white py-3 text-lg">
+          <div className="py-3 space-y-3">
+            <Link href="/cart">
+            <button onClick={onCloseCart} className="w-full border border-purple-500 hover:bg-black hover:text-white py-3 text-lg">
+              {" "}
+              View Cart
+            </button>
+            </Link>
+            <button className="w-full border border-purple-500 bg-purple-500 hover:bg-black text-white py-3 text-lg">
               {" "}
               Checkout
             </button>
           </div>
           <p className="text-center">
             or{" "}
-            <Link href="/shop" className="text-purple-500 hover:text-purple-400">
+            <Link href="/shop" className="text-purple-500 hover:text-black">
               {" "}
               Continue Shopping &rarr;
             </Link>{" "}

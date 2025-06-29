@@ -12,7 +12,7 @@ import {
   IoPersonOutline,
   IoSearchOutline,
 } from "react-icons/io5";
-import Cart from "./component/cart";
+import Cart from "./component/cart/cart";
 import HomeSideBar from "./component/home_sidebar";
 import SearchBar from "./component/search_bar";
 

@@ -3,8 +3,8 @@ import Link from "next/link";
 
 export default function Login() {
   return (
-    <div className="flex flex-col gap-y-5 justify-center items-center min-h-screen bg-white">
-      <div className="shadow w-full max-w-md p-3 flex justify-center bg-black">
+    <div className="flex flex-col gap-y-5 justify-center items-center min-h-screen bg-white px-5">
+      <div className="shadow w-full max-w-md p-3 flex justify-center bg-gray-50">
         <Link href="/">
           <Image
             src="/logo.png"
@@ -15,8 +15,8 @@ export default function Login() {
           />
         </Link>
       </div>
-      <div className="w-full max-w-md p-8 space-y-6 bg-black shadow shadow-purple-500">
-        <h2 className="text-left text-2xl font-bold text-white">
+      <div className="w-full max-w-md p-8 space-y-6 bg-gray-50 shadow">
+        <h2 className="text-left text-2xl font-bold text-blacl">
           <span
             className="border-b-4 border-purple-500"
             style={{ textDecoration: "none" }}
@@ -47,28 +47,23 @@ export default function Login() {
           <div className="flex justify-between items-center">
             <label className="inline-flex items-center">
               <input type="checkbox" className="form-checkbox" />
-              <span className="ml-2 text-sm font-semibold text-white">
-                Remember me
-              </span>
+              <span className="ml-2 text-sm font-semibold">Remember me</span>
             </label>
-            <Link
-              href="/forgot-password"
-              className="text-sm text-white hover:underline"
-            >
+            <Link href="/forgot-password" className="text-sm hover:underline">
               Forgot Password?
             </Link>
           </div>
           <button
             type="submit"
-            className="w-full py-2 px-4 bg-purple-500 text-white hover:font-semibold transition-transform duration-200 transform hover:scale-105"
+            className="w-full py-2 px-4 bg-purple-500 text-white hover:font-semibold hover:bg-black transition-transform duration-200 transform hover:scale-105"
           >
             Login Now
           </button>
         </form>
 
-        <p className="text-center text-sm font-semibold text-white">
+        <p className="text-center text-sm font-semibold">
           Don’t have an account?{" "}
-          <Link href="/signup" className="text-purple-500 hover:underline">
+          <Link href="/register" className="text-purple-500 hover:underline">
             Sign Up Now
           </Link>
         </p>

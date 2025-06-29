@@ -1,29 +1,25 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { FaCheck } from "react-icons/fa";
 import { FaEye } from "react-icons/fa6";
-import { MdNotInterested } from "react-icons/md"
+import { MdNotInterested } from "react-icons/md";
 import { IoBagAdd, IoHeartOutline } from "react-icons/io5";
-import {
-  Dialog,
-  DialogBackdrop,
-  DialogPanel,
-  Radio,
-  RadioGroup,
-} from "@headlessui/react";
+import { Dialog, DialogBackdrop, DialogPanel } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { StarIcon } from "@heroicons/react/20/solid";
 import { useState } from "react";
+import ProductDetailForm from "@/app/ui/component/product/product_detail_form";
 
-const product = {
+const defaultProduct = {
   name: "Basic Tee 6-Pack ",
   price: 192000,
   discount: 21,
   rating: 3.9,
   reviewCount: 117,
   href: "#",
-  imageSrc:
-    "/heel.jpg",
+  imageSrc: "/heel.jpg",
   imageAlt: "Two each of gray, white, and black shirts arranged on table.",
   colors: [
     { name: "White", class: "bg-white", selectedClass: "ring-gray-400" },
@@ -47,18 +43,8 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function ProductCard() {
+export default function ProductCard({ product = defaultProduct }) {
   const [open, setOpen] = useState(false);
-  const [selectedColor, setSelectedColor] = useState(product.colors[0]);
-  const [selectedSize, setSelectedSize] = useState(product.sizes[2]);
-  const [quantity, setQuantity] = useState(1);
-
-    const increaseQuantity = () => {
-        setQuantity((prev) => prev + 1)
-    }
-    const decreaseQuantity = () => {
-        setQuantity((prev) => (prev > 1 ? prev - 1 : 1))
-    }
 
   return (
     <div>
@@ -67,40 +53,72 @@ export default function ProductCard() {
           <button className="absolute z-10 top-1 sm:top-4 right-2 sm:right-5 text-base sm:text-2xl  hover:bg-purple-500 bg-white p-1.5 sm:p-3 rounded-full text-stone-700">
             <IoHeartOutline />
           </button>
-          <button onClick={() => setOpen(true)} className="absolute z-10 top-10 sm:top-20 right-2 sm:right-5 text-base sm:text-2xl  hover:bg-purple-500 bg-white p-1.5 sm:p-3 rounded-full text-stone-700">
+          <button
+            onClick={() => setOpen(true)}
+            className="absolute z-10 top-10 sm:top-20 right-2 sm:right-5 text-base sm:text-2xl  hover:bg-purple-500 bg-white p-1.5 sm:p-3 rounded-full text-stone-700"
+          >
             <FaEye />
           </button>
-          {product.discount ? (<div className="absolute z-10 top-2 sm:top-4 left-2 sm:left-5 text-white text-xs sm:text-base bg-stone-700 hover:text-opacity-80 p-1.5 py-2.5 sm:px-3 sm:py-4 rounded-full ">
-            {product.discount}%
-          </div>) : (<></>)}
+          {product.discount > 0 ? (
+            <div className="absolute z-10 top-2 sm:top-4 left-2 sm:left-5 text-white text-xs sm:text-base bg-stone-700 hover:text-opacity-80 p-1.5 py-2.5 sm:px-3 sm:py-4 rounded-full ">
+              {product.discount}%
+            </div>
+          ) : (
+            <></>
+          )}
           <Image
-            src={product.imageSrc}
-            height={300}
-            width={300}
-            alt={product.imageAlt}
-            className="object-cover w-full transform group-hover:scale-105 transition-transform duration-1000"
+            src={product.imagesrc}
+            height={1000}
+            width={1000}
+            alt={product.name}
+            className="w-full h-60 sm:h-80 lg:h-96 transform group-hover:scale-105 transition-transform duration-500"
           ></Image>
           <div className="hidden absolute bottom-0 right-0 left-0 bg-purple-500 sm:flex gap-3 items-center justify-center transform translate-y-full group-hover:translate-y-0 transition-all duration-300">
             <button className="flex justify-center items-center gap-2 text-white bg-purple-500 hover:bg-black hover-text-white w-full py-2 md:py-4 px-5 text-base md:text-lg">
-                Add to Bag <IoBagAdd />
+              Add to Bag <IoBagAdd />
             </button>
           </div>
         </div>
         <Link href="/shop/detail">
-        <div className="p-2 text-center">
-          <h1 className="text-sm md:text-2xl font-semibold">{product.name}</h1>
-          {product.discount ? (<p className="text-sm  md:text-lg font-medium"><span className="line-through font-normal text-sm md:text-base text-stone-500">#{product.price}</span> #{product.price * product.discount /100}</p>) : (<p className="text-sm md:text-lg">#{product.price}</p>)}
-          <div className="py-1 sm:py-3 text-xs sm:text-base">
-            {product.stock>0 ? (<p className="flex items-center gap-2 justify-center"><FaCheck />
-              In Stock</p>) : (<p className="flex items-center gap-2 justify-center"><MdNotInterested /> Out of Stock</p>)} 
+          <div className="p-2 text-center">
+            <h1 className="text-sm sm:text-xl lg:text-2xl font-semibold">
+              {product.name}
+            </h1>
+            {product.discount > 0 ? (
+              <p className="text-sm  sm:text-lg font-medium">
+                <span className="line-through font-normal text-xs sm:text-base text-stone-500">
+                  #{product.price}
+                </span>{" "}
+                #{(product.price * product.discount) / 100}
+              </p>
+            ) : (
+              <p className="text-sm sm:text-lg font-semibold">
+                #{product.price}
+              </p>
+            )}
+            <div className="py-1 sm:py-3 text-xs sm:text-base">
+              {product.stock > 0 ? (
+                <p className="flex items-center gap-2 justify-center">
+                  <FaCheck />
+                  In Stock
+                </p>
+              ) : (
+                <p className="flex items-center gap-2 justify-center">
+                  <MdNotInterested /> Out of Stock
+                </p>
+              )}
+            </div>
           </div>
-        </div>
         </Link>
         <button className="w-11/12 mx-auto py-1.5 sm:py-2 bg-purple-500 hover:bg-black hover:font-bold text-sm text-white sm:text-base flex justify-center items-center gap-2 sm:hidden">
           Add to Bag <IoBagAdd />
         </button>
       </div>
-      <Dialog open={open} onClose={() => setOpen(false)} className="relative z-50">
+      <Dialog
+        open={open}
+        onClose={() => setOpen(false)}
+        className="relative z-50"
+      >
         <DialogBackdrop
           transition
           className="fixed inset-0 hidden bg-gray-500/75 transition-opacity data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in md:block"
@@ -124,8 +142,8 @@ export default function ProductCard() {
 
                 <div className="grid w-full grid-cols-1 items-start gap-x-6 gap-y-8 sm:grid-cols-12 lg:gap-x-8">
                   <Image
-                    alt={product.imageAlt}
-                    src={product.imageSrc}
+                    alt={product.name}
+                    src={product.imagesrc}
                     width={300}
                     height={300}
                     className="aspect-2/3 w-full rounded-lg bg-gray-100 object-cover sm:col-span-4 lg:col-span-5"
@@ -139,13 +157,21 @@ export default function ProductCard() {
                       aria-labelledby="information-heading"
                       className="mt-2"
                     >
-                      <h3 id="information-heading" className="sr-only">
-                        Product information
-                      </h3>
-
-                      {product.discount ? (<p><span className="text-xl text-stone-500 line-through pe-3">#{product.price}</span> <span className="text-2xl text-gray-900"> #{product.price}</span></p>) : (<p className="text-2xl text-stone-900"># {product.price}</p>)}
-
-                      {/* Reviews */}
+                      {product.discount ? (
+                        <p>
+                          <span className="text-xl text-stone-500 line-through pe-3">
+                            #{product.price}
+                          </span>{" "}
+                          <span className="text-2xl text-gray-900">
+                            {" "}
+                            #{product.price}
+                          </span>
+                        </p>
+                      ) : (
+                        <p className="text-2xl text-stone-900">
+                          # {product.price}
+                        </p>
+                      )}
                       <div className="mt-6">
                         <h4 className="sr-only">Reviews</h4>
                         <div className="flex items-center">
@@ -175,122 +201,7 @@ export default function ProductCard() {
                         </div>
                       </div>
                     </section>
-
-                    <section
-                      aria-labelledby="options-heading"
-                      className="mt-10"
-                    >
-                      <h3 id="options-heading" className="sr-only">
-                        Product options
-                      </h3>
-
-                      <form>
-                        {/* Colors */}
-                        <fieldset aria-label="Choose a color">
-                          <legend className="text-sm font-medium text-gray-900">
-                            Color
-                          </legend>
-
-                          <RadioGroup
-                            value={selectedColor}
-                            onChange={setSelectedColor}
-                            className="mt-4 flex items-center gap-x-3"
-                          >
-                            {product.colors.map((color) => (
-                              <Radio
-                                key={color.name}
-                                value={color}
-                                aria-label={color.name}
-                                className={({checked}) =>
-          
-                                  `relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 border-2 transition ${checked ? 'border-purple-500 ring-2 ring-purple-500' : 'border-gray-300'}`
-                                }
-                              >
-                                <span
-                                  aria-hidden="true"
-                                  className={classNames(
-                                    color.class,
-                                    "size-8 rounded-full border border-black/10"
-                                  )}
-                                />
-                              </Radio>
-                            ))}
-                          </RadioGroup>
-                        </fieldset>
-
-                        {/* Sizes */}
-                        <fieldset aria-label="Choose a size" className="mt-10">
-                          <div className="flex items-center">
-                            <div className="text-sm font-medium text-gray-900">
-                              Size
-                            </div>
-                          </div>
-
-                          <RadioGroup
-                            value={selectedSize}
-                            onChange={setSelectedSize}
-                            className="mt-4 grid grid-cols-4 gap-4"
-                          >
-                            {product.sizes.map((size) => (
-                              <Radio
-                                key={size.name}
-                                value={size}
-                                disabled={!size.inStock}
-                                className={({checked}) => classNames(
-                                  size.inStock
-                                    ? "cursor-pointer bg-white text-gray-900 shadow-xs"
-                                    : "cursor-not-allowed bg-gray-50 text-gray-200",
-                                  checked ? 'border-purple-500 ring-2 ring-purple-500' : 'border-stone-300',
-                                  "group border-2 transition relative flex items-center justify-center px-4 py-3 text-sm font-medium uppercase hover:bg-gray-50 focus:outline-hidden sm:flex-1"
-                                )}
-                              >
-                                <span>{size.name}</span>
-                                {size.inStock ? (
-                                  <span
-                                    aria-hidden="true"
-                                    className="pointer-events-none absolute -inset-px rounded-md border-2 border-transparent group-data-checked:border-indigo-500 group-data-focus:border"
-                                  />
-                                ) : (
-                                  <span
-                                    aria-hidden="true"
-                                    className="pointer-events-none absolute -inset-px rounded-md border-2 border-stone-200"
-                                  >
-                                    <svg
-                                      stroke="currentColor"
-                                      viewBox="0 0 100 100"
-                                      preserveAspectRatio="none"
-                                      className="absolute inset-0 size-full stroke-2 text-gray-200"
-                                    >
-                                      <line
-                                        x1={0}
-                                        x2={100}
-                                        y1={100}
-                                        y2={0}
-                                        vectorEffect="non-scaling-stroke"
-                                      />
-                                    </svg>
-                                  </span>
-                                )}
-                              </Radio>
-                            ))}
-                          </RadioGroup>
-                        </fieldset>
-
-                        <div className="flex justify-between gap-5 mt-6">
-                          <div className="flex items-center border-2 border-stone-300">
-                            <button onClick={decreaseQuantity} className="px-3 py-2 text-lg border-r-2 border-stone-300 hover:bg-stone-100"> - </button>
-                            <input type="text" className="w-12 text-center focus:outline-none" value={quantity} readOnly />
-                            <button onClick={increaseQuantity} className="px-3 py-2 text-lg border-l-2 border-stone-300 hover:bg-stone-100"> + </button>
-                          </div>
-                        <button
-                          type="submit"
-                          className="flex gap-3 w-full items-center justify-center border border-transparent bg-purple-500 px-8 py-3 text-base font-medium text-white hover:bg-black focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:outline-hidden"
-                        >
-                          Add to bag <IoBagAdd />
-                        </button>
-                        </div>
-                      </form>
-                    </section>
+                    <ProductDetailForm product={product} />
                   </div>
                 </div>
               </div>

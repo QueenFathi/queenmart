@@ -1,7 +1,7 @@
 import { IoCloseOutline } from "react-icons/io5";
-import SmallProductCard from "../component/small_product_card";
+import SmallProductCard from "@/app/ui/component/small_product_card";
 
-export default function ShopFilterSidebar ({openBar, onClose}) {
+export default function ShopFilterSidebar ({openBar, onClose, products}) {
     return (
         <div
         className={`fixed  z-40 inset-0 bg-stone-900 bg-opacity-50 transition-opacity ${
@@ -98,9 +98,9 @@ export default function ShopFilterSidebar ({openBar, onClose}) {
             <div className="mt-10">
               <h2 className="font-semibold text-lg pb-3">TOP RATED PRODUCTS</h2>
               <div className="grid gap-5">
-                <SmallProductCard />
-                <SmallProductCard />
-                <SmallProductCard />
+                {products.map((product) => (
+                  <SmallProductCard key={product.id} product={product} />
+                ))}
               </div>
             </div>
           </div>
