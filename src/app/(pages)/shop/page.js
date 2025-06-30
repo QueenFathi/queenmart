@@ -46,7 +46,7 @@ export default function Shop() {
       <div className="py-16 md:py-20">
         <Header title={"Shop"} />
         <div className="text-center py-5 border-b border-stone-300">
-          <h1 className="text-stone-700">Showing 1-24 of 184 results</h1>
+          <h1 className="text-stone-700">Showing 1-12 of {products && products.length} results</h1>
         </div>
         <div className="container mx-auto px-2">
           <div className="py-5 flex justify-between items-center">

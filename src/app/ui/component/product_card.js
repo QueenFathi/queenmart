@@ -134,7 +134,7 @@ export default function ProductCard({ product = defaultProduct }) {
                 <button
                   type="button"
                   onClick={() => setOpen(false)}
-                  className="absolute top-4 right-4 text-gray-400 hover:text-gray-500 sm:top-8 sm:right-6 md:top-6 md:right-6 lg:top-8 lg:right-8"
+                  className="absolute top-4 right-4 text-gray-400 hover:text-black sm:top-8 sm:right-6 md:top-6 md:right-6 lg:top-8 lg:right-8"
                 >
                   <span className="sr-only">Close</span>
                   <XMarkIcon aria-hidden="true" className="size-6" />
@@ -164,7 +164,7 @@ export default function ProductCard({ product = defaultProduct }) {
                           </span>{" "}
                           <span className="text-2xl text-gray-900">
                             {" "}
-                            #{product.price}
+                            #{(product.price * product.discount) / 100}
                           </span>
                         </p>
                       ) : (
