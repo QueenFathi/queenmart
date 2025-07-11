@@ -1,6 +1,6 @@
 import Header from "@/app/ui/component/global/header";
 import { FaEnvelope, FaMapMarkerAlt, FaPhoneAlt } from "react-icons/fa";
-import { faq } from "@/app/lib/dummy_data";
+import { faqdata } from "@/app/lib/dummy_data";
 
 export default function Contact() {
   return (
@@ -15,7 +15,7 @@ export default function Contact() {
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5 gap-y-10 my-5">
-          {faq.map((item, index) => (
+          {faqdata.map((item, index) => (
             <div key={index} className="">
               <h1 className="font-medium">{item.question}</h1>
               <p className="mt-3 text-stone-700">{item.answer}</p>
