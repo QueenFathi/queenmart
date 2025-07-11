@@ -1,4 +1,4 @@
-const faq = [
+export const faq = [
   {
     question: "Do you have a physical store?",
     answer:
@@ -51,7 +51,7 @@ const faq = [
   },
 ];
 
-const reviews = [
+export const reviews = [
   {
     name: "Amaka O.",
     date: "July 7, 2024",
@@ -72,7 +72,7 @@ const reviews = [
   }
 ];
 
-const cardata = [
+export const cardata = [
   {
     img: "/car1.png",
     text: "AUTUMN FASHION SALE",

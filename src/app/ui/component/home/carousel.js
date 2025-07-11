@@ -6,7 +6,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectFade} from "swiper/modules";
 import Image from "next/image";
 import Link from "next/link";
-import cardata from "@/app/lib/dummy_data"
+import { cardata } from "@/app/lib/dummy_data"
 
 export default function Carousel() {
   return (
