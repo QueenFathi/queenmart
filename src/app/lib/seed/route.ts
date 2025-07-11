@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt';
 import { db } from '@vercel/postgres';
-import { users, products } from '../lib/placeholder-data';
+import { users, products } from './placeholder_data';
 
 const client = await db.connect();
 
@@ -95,7 +95,7 @@ export async function GET() {
     await client.sql`COMMIT`;
 
     return Response.json({ message: 'Database seeded successfully' });
-  }  catch (error: any) {
+  } catch (error: any) {
     await client.sql`ROLLBACK`;
     console.error("Seeding error:", error); // Show full error in console
     return Response.json(

@@ -25,8 +25,6 @@ export default function Footer() {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-
-      // Show navbar when scrolling up
       if (currentScrollY < lastScrollY) {
         setShowNavbar(true);
       } else {
@@ -144,12 +142,12 @@ export default function Footer() {
           showNavbar ? "translate-y-0" : "translate-y-full"
         } bottom-0 z-10 fixed w-full sm:hidden transition-transform duration-300`}
       >
-        <div className="bg-white text-stone-700 px-5 py-3">
+        <div className="bg-white text-stone-700 px-10 py-3">
           <div className="flex justify-between">
             {[
               { href: "/shop", name: "Shop", icon: <FaShop /> },
               { href: "/wishlist", name: "Wishlist", icon: <IoHeart /> },
-              { href: "/cart", name: "Bag", icon: <IoBag /> },
+              { href: "/bag", name: "Bag", icon: <IoBag /> },
               { href: "", name: "Account", icon: <IoPerson /> },
             ].map((item, index) => (
               <div key={index}>
@@ -160,13 +158,12 @@ export default function Footer() {
                   })}
                 >
                   {item.icon}
-                  <p>{item.name}</p>
+                  <p className="text-xs">{item.name}</p>
                 </Link>
               </div>
             ))}
           </div>
         </div>
-        {/* <Cart openCart={cart} onCloseCart={() => setCart(!cart)}/> */}
       </div>
     </footer>
   );

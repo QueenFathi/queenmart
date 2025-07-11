@@ -2,6 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function Header({ title }) {
+  const link = title;
+  const href = link.toLowerCase();
+
   return (
     <div className="-">
       <div className="relative">
@@ -16,7 +19,7 @@ export default function Header({ title }) {
           <h1 className="text-2xl md:text-4xl font-bold">{title}</h1>
           <p>
             <Link href="/">Home</Link> /
-            <Link href={`/${title}`} className="font-semibold">
+            <Link href={`/${href}`} className="font-semibold">
               {" "}
               {title}
             </Link>

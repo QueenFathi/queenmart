@@ -8,7 +8,7 @@ export default function ProductCardSkeleton() {
         height={1000}
         width={1000}
         alt="placeholder img"
-        className="w-full h-60 sm:h-80 lg:h-96"
+        className="w-full h-52 sm:h-80 lg:h-96"
       />
       <div className="py-2 space-y-3">
         <div className="bg-gray-200 h-8" />

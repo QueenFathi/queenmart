@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 import Link from "next/link";
 import clsx from "clsx";
 import {
@@ -13,23 +13,21 @@ import {
   IoSearchOutline,
 } from "react-icons/io5";
 import Cart from "./component/cart/cart";
-import HomeSideBar from "./component/home_sidebar";
-import SearchBar from "./component/search_bar";
-
-
+import HomeSideBar from "./component/home/home_sidebar";
+import { useWishlist } from "../context/wishlist/wishlist_provider";
+import { useCart } from "../context/cart/cart_provider";
+import { useSearch } from "../context/search/search_context";
 
 export default function Navbar() {
+  const pathname = usePathname();
   const [isOpenSideBar, setIsOpenSideBar] = useState(false);
-  const [openSearchBar, setOpenSearchBar] = useState(false);
   const [openCart, setOpenCart] = useState(false);
   const [showNavbar, setShowNavbar] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isAtFooter, setIsAtFooter] = useState(false);
-  const pathname = usePathname();
-
-  const updateBodyOverflow = (s1, s2, s3) => {
-    document.body.style.overflow = s1 || s2 || s3 ? "hidden" : "auto"
-  }
+  const { wishlist } = useWishlist();
+  const { cart } = useCart();
+  const { state, dispatch } = useSearch();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -37,7 +35,6 @@ export default function Navbar() {
       const footerOffset = document.getElementById("footer").offsetTop;
       const windowHeight = window.innerHeight;
 
-      // Show navbar when scrolling up
       if (currentScrollY < lastScrollY) {
         setShowNavbar(true);
       } else {
@@ -48,7 +45,6 @@ export default function Navbar() {
         setShowNavbar(true);
       }
 
-      // Stop navbar at the footer
       if (currentScrollY + windowHeight >= footerOffset) {
         setIsAtFooter(true);
       } else {
@@ -74,7 +70,7 @@ export default function Navbar() {
           <div className="lg:hidden flex flex-end">
             <button
               className="flex items-center md:px-3 py-2 rounded text-gray-200 hover:text-gray-400"
-              onClick={() => {setIsOpenSideBar(!isOpenSideBar); updateBodyOverflow(!isOpenSideBar, openSearchBar, openCart)}}
+              onClick={() => setIsOpenSideBar(!isOpenSideBar)}
             >
               {isOpenSideBar ? (
                 <p className="text-stone-700 flex items-center">
@@ -116,17 +112,26 @@ export default function Navbar() {
             </button>
           </div>
           <div className="text-xl text-stone-700 text font-semibold hidden lg:flex">
-            {[{href: '/', name: 'HOME'}, {href: '/shop', name: 'SHOP'}, {href: '/about', name: 'ABOUT US'}, {href: '/contact', name: 'CONTACT US'},].map((item, index) => (
-                <Link
+            {[
+              { href: "/", name: "HOME" },
+              { href: "/shop", name: "SHOP" },
+              { href: "/about", name: "ABOUT US" },
+              { href: "/contact", name: "CONTACT US" },
+            ].map((item, index) => (
+              <Link
                 href={item.href}
                 key={index}
-                className={clsx("mx-3 text-lg font-medium hover:border-b-4 hover:border-purple-500", {
-                  "border-b-4 border-purple-500 text-stone-950": pathname === item.href,
-                })}
+                className={clsx(
+                  "mx-3 text-lg font-medium hover:border-b-4 hover:border-purple-500",
+                  {
+                    "border-b-4 border-purple-500 text-stone-950":
+                      pathname === item.href,
+                  }
+                )}
               >
                 {item.name}
-              </Link>  
-              ))}
+              </Link>
+            ))}
           </div>
           <div>
             <Link href="/">
@@ -148,34 +153,41 @@ export default function Navbar() {
             <div className="relative">
               <button
                 className="text-3xl"
-                onClick={() => {setOpenSearchBar(!openSearchBar); updateBodyOverflow(isOpenSideBar, !openSearchBar, openCart)}}
+                onClick={() => dispatch({ type: "TOGGLE_SEARCH" })}
               >
-                {openSearchBar ? <IoCloseOutline /> : <IoSearchOutline />}
+                {state.isOpen ? <IoCloseOutline /> : <IoSearchOutline />}
               </button>
             </div>
             <div className="relative  hidden lg:flex">
               <button className="text-3xl">
-                <Link href="/wishlist"><IoHeartOutline /></Link>
-                {/* <span className="absolute top-1 right-0 p-1 rounded-full bg-orange-600 text-blue-600" /> */}
+                <Link href="/wishlist">
+                  <IoHeartOutline />
+                </Link>
+                <span className="absolute -top-3 -right-1 px-2 py-1 rounded-full bg-purple-300 text-xs text-white">
+                  {wishlist.length}
+                </span>
               </button>
             </div>
             <div className="relative">
               <button
                 className="text-3xl"
-                onClick={() => {setOpenCart(!openCart); updateBodyOverflow(isOpenSideBar, openSearchBar, true)}}
+                onClick={() => setOpenCart(!openCart)}
               >
                 <IoBagOutline />
-                <span className="absolute top-0 -right-1 px-1 rounded-full bg-purple-300 text-xs text-white">
-                  0
+                <span className="absolute -top-2 -right-1 px-2 py-1 rounded-full bg-purple-300 text-xs text-white">
+                  {cart.length}
                 </span>
               </button>
             </div>
           </div>
         </div>
       </nav>
-      <HomeSideBar isOpenSideBar={isOpenSideBar} pathname={pathname} onClose={() => {setIsOpenSideBar(!isOpenSideBar); updateBodyOverflow(false, openSearchBar, openCart)}} />
-      <SearchBar openSearchBar={openSearchBar} />
-      <Cart openCart={openCart} onCloseCart={() => {setOpenCart(!openCart); updateBodyOverflow(isOpenSideBar, openSearchBar, false)}}/>
+      <HomeSideBar
+        isOpenSideBar={isOpenSideBar}
+        pathname={pathname}
+        onClose={() => setIsOpenSideBar(!isOpenSideBar)}
+      />
+      <Cart openCart={openCart} onCloseCart={() => setOpenCart(!openCart)} />
     </div>
   );
 }

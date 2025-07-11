@@ -2,56 +2,58 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { FaCheck } from "react-icons/fa";
 import { FaEye } from "react-icons/fa6";
-import { MdNotInterested } from "react-icons/md";
-import { IoBagAdd, IoHeartOutline } from "react-icons/io5";
+import { IoBagAdd, IoHeart, IoHeartOutline } from "react-icons/io5";
 import { Dialog, DialogBackdrop, DialogPanel } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { StarIcon } from "@heroicons/react/20/solid";
 import { useState } from "react";
-import ProductDetailForm from "@/app/ui/component/product/product_detail_form";
-
-const defaultProduct = {
-  name: "Basic Tee 6-Pack ",
-  price: 192000,
-  discount: 21,
-  rating: 3.9,
-  reviewCount: 117,
-  href: "#",
-  imageSrc: "/heel.jpg",
-  imageAlt: "Two each of gray, white, and black shirts arranged on table.",
-  colors: [
-    { name: "White", class: "bg-white", selectedClass: "ring-gray-400" },
-    { name: "Gray", class: "bg-gray-200", selectedClass: "ring-gray-400" },
-    { name: "Black", class: "bg-gray-900", selectedClass: "ring-gray-900" },
-  ],
-  sizes: [
-    { name: "XXS", inStock: true },
-    { name: "XS", inStock: true },
-    { name: "S", inStock: true },
-    { name: "M", inStock: true },
-    { name: "L", inStock: true },
-    { name: "XL", inStock: true },
-    { name: "XXL", inStock: true },
-    { name: "XXXL", inStock: false },
-  ],
-  stock: 2,
-};
+import { useCart } from "@/app/context/cart/cart_provider";
+import { useWishlist } from "@/app/context/wishlist/wishlist_provider";
+import AddOrRemoveQuantity from "./add_or_remove_quantity";
+import ProductDetailForm from "@/app/ui/component/shop/product/product_detail_form";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function ProductCard({ product = defaultProduct }) {
+export default function ProductCard({ product }) {
   const [open, setOpen] = useState(false);
+  const { wishlist, addToWishlist, deleteWishlistItem } = useWishlist();
+  const { cart, addOne, addItem, removeItem } = useCart();
+
+  const itemLink = `/shop/${encodeURIComponent(product.id)}`;
+
+  const alreadyWishlisted =
+    wishlist.filter((wItem) => wItem.id === product.id).length > 0;
+
+  const alreadyCarted =
+    cart.filter((cItem) => cItem.id === product.id).length > 0;
+
+  const itemInCart = cart.find((item) => item.id === product.id);
+  const quantity = itemInCart ? itemInCart.qty : 0;
+
+  const handleWishlist = () => {
+    alreadyWishlisted ? deleteWishlistItem(product) : addToWishlist(product);
+  };
+  const addToBag = () => {
+    if (product.colors || product.sizes) {
+      setOpen(true);
+    } else {
+      addOne(product);
+    }
+  };
 
   return (
     <div>
       <div className="pb-3 sm:pb-0 hover:shadow-lg shadow sm:shadow-none">
         <div className="relative group overflow-hidden">
-          <button className="absolute z-10 top-1 sm:top-4 right-2 sm:right-5 text-base sm:text-2xl  hover:bg-purple-500 bg-white p-1.5 sm:p-3 rounded-full text-stone-700">
-            <IoHeartOutline />
+          <button
+            aria-label="Wishlist"
+            onClick={handleWishlist}
+            className="absolute z-10 top-1 sm:top-4 right-2 sm:right-5 text-base sm:text-2xl  hover:bg-purple-500 bg-white p-1.5 sm:p-3 rounded-full text-stone-700"
+          >
+            {alreadyWishlisted ? <IoHeart /> : <IoHeartOutline />}
           </button>
           <button
             onClick={() => setOpen(true)}
@@ -71,32 +73,41 @@ export default function ProductCard({ product = defaultProduct }) {
             height={1000}
             width={1000}
             alt={product.name}
-            className="w-full h-60 sm:h-80 lg:h-96 transform group-hover:scale-105 transition-transform duration-500"
+            className="w-full h-52 sm:h-80 lg:h-96 transform group-hover:scale-105 transition-transform duration-500"
           ></Image>
           <div className="hidden absolute bottom-0 right-0 left-0 bg-purple-500 sm:flex gap-3 items-center justify-center transform translate-y-full group-hover:translate-y-0 transition-all duration-300">
-            <button className="flex justify-center items-center gap-2 text-white bg-purple-500 hover:bg-black hover-text-white w-full py-2 md:py-4 px-5 text-base md:text-lg">
+            <button
+              type="button"
+              disabled={product.stock < 1}
+              onClick={() => addOne(product)}
+              className={`flex justify-center items-center gap-2 text-white hover-text-white w-full py-2 md:py-4 px-5 text-base md:text-lg ${
+                product.stock < 1
+                  ? "cursor-not-allowed bg-stone-400"
+                  : "cursor-pointer bg-purple-500 hover:bg-black hover:font-bold"
+              }`}
+            >
               Add to Bag <IoBagAdd />
             </button>
           </div>
         </div>
-        <Link href="/shop/detail">
-          <div className="p-2 text-center">
-            <h1 className="text-sm sm:text-xl lg:text-2xl font-semibold">
+        <Link href={itemLink}>
+          <div className="py-5 text-center">
+            <h1 className="text-sm sm:text-xl lg:text-2xl text-stone-600">
               {product.name}
             </h1>
             {product.discount > 0 ? (
-              <p className="text-sm  sm:text-lg font-medium">
-                <span className="line-through font-normal text-xs sm:text-base text-stone-500">
+              <p className="text-sm  sm:text-lg font-semibold">
+                <span className="line-through font-normal text-xs sm:text-sm text-stone-500">
                   #{product.price}
                 </span>{" "}
-                #{(product.price * product.discount) / 100}
+                #{product.price - (product.price * product.discount) / 100}
               </p>
             ) : (
               <p className="text-sm sm:text-lg font-semibold">
                 #{product.price}
               </p>
             )}
-            <div className="py-1 sm:py-3 text-xs sm:text-base">
+            {/* <div className="py-1 sm:py-3 text-xs sm:text-base">
               {product.stock > 0 ? (
                 <p className="flex items-center gap-2 justify-center">
                   <FaCheck />
@@ -107,12 +118,33 @@ export default function ProductCard({ product = defaultProduct }) {
                   <MdNotInterested /> Out of Stock
                 </p>
               )}
-            </div>
+            </div> */}
           </div>
         </Link>
-        <button className="w-11/12 mx-auto py-1.5 sm:py-2 bg-purple-500 hover:bg-black hover:font-bold text-sm text-white sm:text-base flex justify-center items-center gap-2 sm:hidden">
-          Add to Bag <IoBagAdd />
-        </button>
+        {alreadyCarted && quantity > 0 && !product.colors && !product.sizes ? (
+          <div className="w-11/12 mx-auto sm:hidden">
+            <AddOrRemoveQuantity
+              className={"w-full"}
+              addOne={addOne}
+              removeItem={removeItem}
+              qty={quantity}
+              product={product}
+            />
+          </div>
+        ) : (
+          <button
+            type="button"
+            onClick={addToBag}
+            disabled={product.stock < 1}
+            className={`w-11/12 mx-auto py-2 shadow text-sm text-white sm:text-base flex justify-center items-center gap-2 sm:hidden ${
+              product.stock < 1
+                ? "cursor-not-allowed bg-stone-400"
+                : "cursor-pointer bg-purple-500 hover:bg-black hover:font-bold"
+            }`}
+          >
+            Add to Bag <IoBagAdd />
+          </button>
+        )}
       </div>
       <Dialog
         open={open}
@@ -164,7 +196,9 @@ export default function ProductCard({ product = defaultProduct }) {
                           </span>{" "}
                           <span className="text-2xl text-gray-900">
                             {" "}
-                            #{(product.price * product.discount) / 100}
+                            #
+                            {product.price -
+                              (product.price * product.discount) / 100}
                           </span>
                         </p>
                       ) : (
@@ -196,12 +230,20 @@ export default function ProductCard({ product = defaultProduct }) {
                             href="#"
                             className="ml-3 text-sm font-medium text-purple-500 hover:text-stone-700"
                           >
-                            {product.reviewCount} reviews
+                            {product.reviewcount} reviews
                           </a>
                         </div>
                       </div>
                     </section>
-                    <ProductDetailForm product={product} />
+                    <ProductDetailForm
+                      alreadyCarted={alreadyCarted}
+                      alreadyWishlisted={alreadyWishlisted}
+                      handleWishlist={handleWishlist}
+                      product={product}
+                      addItem={addItem}
+                      removeItem={removeItem}
+                      quantity={quantity}
+                    />
                   </div>
                 </div>
               </div>

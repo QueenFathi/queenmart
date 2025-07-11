@@ -1,58 +1,6 @@
-import Header from "@/app/ui/component/header";
+import Header from "@/app/ui/component/global/header";
 import { FaEnvelope, FaMapMarkerAlt, FaPhoneAlt } from "react-icons/fa";
-
-const faq = [
-  {
-    question: "Do you have a physical store?",
-    answer:
-      "Yes. It is located at 10, Road 17, Agara Estate, Odo-Ona Elewe Ibadan, Oyo State, Nigeria. We also deliver nationwide/internationally",
-  },
-  {
-    question: "How do I place an order",
-    answer:
-      "Simply browse our collection, add items to your cart, and proceed to checkout. Follow the onscreen instructions to complete your purchase",
-  },
-  {
-    question: "Can I modify or cancel my order after placing it",
-    answer:
-      "Orders can be modified or canelled within 12 hours of placement. After that, they are processed and cannot be changed",
-  },
-  {
-    question: "How can I track my order",
-    answer:
-      "Once your order is shipped, you will receive a tracking number via email to monitor its status",
-  },
-  {
-    question: "Do I have to pay for return shipping",
-    answer:
-      "Customers may be responsibe for return shipping unless the item was defective or incorrect",
-  },
-  {
-    question: "Do you have a physical store?",
-    answer:
-      "Yes. It is located at 10, Road 17, Agara Estate, Odo-Ona Elewe Ibadan, Oyo State, Nigeria. We also deliver nationwide/internationally",
-  },
-  {
-    question: "How do I place an order",
-    answer:
-      "Simply browse our collection, add items to your cart, and proceed to checkout. Follow the onscreen instructions to complete your purchase",
-  },
-  {
-    question: "Can I modify or cancel my order after placing it",
-    answer:
-      "Orders can be modified or canelled within 12 hours of placement. After that, they are processed and cannot be changed",
-  },
-  {
-    question: "How can I track my order",
-    answer:
-      "Once your order is shipped, you will receive a tracking number via email to monitor its status",
-  },
-  {
-    question: "Do I have to pay for return shipping",
-    answer:
-      "Customers may be responsibe for return shipping unless the item was defective or incorrect",
-  },
-];
+import { faq } from "@/app/lib/dummy_data";
 
 export default function Contact() {
   return (

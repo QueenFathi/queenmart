@@ -1,44 +1,12 @@
 "use client";
 
-import { Swiper, SwiperSlide } from "swiper/react";
-
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/effect-fade";
-// import "swiper/css/pagination";
-// import "swiper/css/navigation";
-
+import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectFade} from "swiper/modules";
 import Image from "next/image";
 import Link from "next/link";
-
-const cardata = [
-  {
-    img: "/car1.png",
-    text: "AUTUMN FASHION SALE",
-    smalltext: "DISCOUNT UP TO 30% OFF",
-  },
-  {
-    img: "/car2.png",
-    text: "ELEVATE YOUR FASHION STYLE",
-    smalltext: "INSPIRED BY YOUR FAVOURITE CELEBRITIES",
-  },
-  {
-    img: "/car3.png",
-    text: "NEW COLLECTION: BAG FASHION SALE",
-    smalltext: "TO MAKE YOUR APPEARANCE BETTER",
-  },
-  {
-    img: "/car4.jpg",
-    text: "NEW ARRIVALS: SPECIAL OFFER",
-    smalltext: "DISCOUNT UP TO 20% OFF",
-  },
-  {
-    img: "/car5.jpg",
-    text: "ENHANCE YOUR INNER BEAUTY",
-    smalltext: "CHECK OUT OUR FASHION ACCESORIES",
-  },
-];
+import cardata from "@/app/lib/dummy_data"
 
 export default function Carousel() {
   return (
