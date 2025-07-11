@@ -1,4 +1,4 @@
-const faqdata = [
+const faq = [
   {
     question: "Do you have a physical store?",
     answer:
