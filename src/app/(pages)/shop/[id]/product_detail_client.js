@@ -3,13 +3,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { StarIcon } from "@heroicons/react/20/solid";
-import ProductCard from "@/app/ui/component/product_card";
+import ProductCard from "@/app/ui/component/global/product_card";
 import ProductDetailForm from "@/app/ui/component/shop/product/product_detail_form";
 import ReviewCard from "@/app/ui/component/shop/product/reviewcard";
 import AccordionSection from "@/app/ui/component/shop/product/accordion_section";
-import ProductCardSkeleton from "@/app/ui/component/product_card_skeleton";
-import { useWishlist } from "@/app/context/wishlist/WishlistProvider";
-import { useCart } from "@/app/context/cart/CartProvider";
+import ProductCardSkeleton from "@/app/ui/component/skeletons/product_card_skeleton";
+import { useWishlist } from "@/app/context/wishlist/wishlist_provider";
+import { useCart } from "@/app/context/cart/cart_provider";
 import { reviews } from "@/app/lib/dummy_data";
 
 const shippingData =
