@@ -12,6 +12,7 @@ import { useCart } from "@/app/context/cart/cart_provider";
 import { useWishlist } from "@/app/context/wishlist/wishlist_provider";
 import AddOrRemoveQuantity from "./add_or_remove_quantity";
 import ProductDetailForm from "@/app/ui/component/shop/product/product_detail_form";
+import { formatMoney } from "../Util/utilFunc";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -79,7 +80,7 @@ export default function ProductCard({ product }) {
             <button
               type="button"
               disabled={product.stock < 1}
-              onClick={() => addOne(product)}
+              onClick={addToBag}
               className={`flex justify-center items-center gap-2 text-white hover-text-white w-full py-2 md:py-4 px-5 text-base md:text-lg ${
                 product.stock < 1
                   ? "cursor-not-allowed bg-stone-400"
@@ -98,13 +99,13 @@ export default function ProductCard({ product }) {
             {product.discount > 0 ? (
               <p className="text-sm  sm:text-lg font-semibold">
                 <span className="line-through font-normal text-xs sm:text-sm text-stone-500">
-                  #{product.price}
+                  # {formatMoney(product.price)}
                 </span>{" "}
-                #{product.price - (product.price * product.discount) / 100}
+                # {formatMoney(product.price - (product.price * product.discount) / 100)}
               </p>
             ) : (
               <p className="text-sm sm:text-lg font-semibold">
-                #{product.price}
+                # {formatMoney(product.price)}
               </p>
             )}
             {/* <div className="py-1 sm:py-3 text-xs sm:text-base">
@@ -192,18 +193,16 @@ export default function ProductCard({ product }) {
                       {product.discount ? (
                         <p>
                           <span className="text-xl text-stone-500 line-through pe-3">
-                            #{product.price}
+                            # {formatMoney(product.price)}
                           </span>{" "}
                           <span className="text-2xl text-gray-900">
                             {" "}
-                            #
-                            {product.price -
-                              (product.price * product.discount) / 100}
+                            # {formatMoney(product.price - (product.price * product.discount) / 100)}
                           </span>
                         </p>
                       ) : (
                         <p className="text-2xl text-stone-900">
-                          # {product.price}
+                          # {formatMoney(product.price)}
                         </p>
                       )}
                       <div className="mt-6">
@@ -240,6 +239,7 @@ export default function ProductCard({ product }) {
                       alreadyWishlisted={alreadyWishlisted}
                       handleWishlist={handleWishlist}
                       product={product}
+                      addOne={addOne}
                       addItem={addItem}
                       removeItem={removeItem}
                       quantity={quantity}

@@ -6,7 +6,7 @@ import Search from "./search";
 import SmallProductCard from "@/app/ui/component/global/small_product_card";
 import { usePathname, useRouter } from "next/navigation";
 
-export default function SearchOverlay({ results, query }) {
+export default function SearchOverlayClient({ results, query }) {
   const { state, dispatch } = useSearch();
   const router = useRouter();
   const pathname = usePathname();
@@ -42,7 +42,7 @@ export default function SearchOverlay({ results, query }) {
         {results.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {results.map((product) => (
-              <SmallProductCard key={product.id} product={product} />
+              <SmallProductCard key={product.id} product={product} onClick={handleCloseSearch} />
             ))}
           </div>
         ) : (

@@ -1,11 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
+import { formatMoney } from "../Util/utilFunc";
 
 export default function CartItem({ item, deleteItem }) {
   const itemLink = `/shop/${encodeURIComponent(item.id)}`;
   return (
     <Link href={itemLink}>
-      <div className="flex gap-y-5 gap-x-10">
+      <div className="flex gap-y-5 gap-x-3 md:gap-x-5">
         <Image
           src={item.imagesrc}
           width={300}
@@ -18,14 +19,16 @@ export default function CartItem({ item, deleteItem }) {
             <div className="flex justify-between items-center">
               <h1 className="text-stone-500">{item.name}</h1>
               {item.discount > 0 ? (
-                <p className="text-xl font-semibold">
-                  <span className="line-through font-normal text-xs sm:text-sm text-stone-500">
-                    #{item.price}
+                <p className="text-lg md:text-xl font-semibold">
+                  <span className="line-through font-normal text-xs md:text-sm text-stone-500">
+                    # {formatMoney(item.price)}
                   </span>{" "}
-                  #{item.price - (item.price * item.discount) / 100}
+                  # {formatMoney(item.price - (item.price * item.discount) / 100)}
                 </p>
               ) : (
-                <p className="text-xl font-semibold">#{item.price}</p>
+                <p className="text-lg md:text-xl font-semibold">
+                  # {formatMoney(item.price)}
+                </p>
               )}
             </div>
             {item.color && (
@@ -42,7 +45,7 @@ export default function CartItem({ item, deleteItem }) {
                 e.preventDefault();
                 deleteItem(item);
               }}
-              className="border py-2 px-5 hover:bg-purple-500 hover:text-white"
+              className="border py-2 px-5 hover:bg-purple-500 hover:text-white text-sm sm:text-base"
             >
               Remove
             </button>

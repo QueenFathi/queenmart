@@ -8,6 +8,7 @@ import AddOrRemoveQuantity from "../../global/add_or_remove_quantity";
 export default function ProductDetailForm({
   product,
   addItem,
+  addOne,
   removeItem,
   quantity,
   alreadyCarted,
@@ -17,6 +18,10 @@ export default function ProductDetailForm({
   const [selectedColor, setSelectedColor] = useState(null);
   const [selectedSize, setSelectedSize] = useState(null);
   const [qty, setQty] = useState(1);
+  const [showError, setShowError] = useState(false);
+
+  const requiresSize = product.sizes?.length > 0;
+  const requiresColor = product.colors?.length > 0;
 
   const increment = () => {
     if (qty < product.stock) {
@@ -34,6 +39,20 @@ export default function ProductDetailForm({
   function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
   }
+
+  const handleAddToCart = () => {
+    if ((requiresSize && !selectedSize) || (requiresColor && !selectedColor)) {
+      setShowError(true);
+      return;
+    }
+    addItem({
+      ...product,
+      qty: qty,
+      color: selectedColor,
+      size: selectedSize,
+    });
+    setShowError(false);
+  };
 
   return (
     <section aria-labelledby="options-heading" className="mt-10">
@@ -183,21 +202,28 @@ export default function ProductDetailForm({
           ) : (
             <button
               type="button"
-              onClick={() =>
-                addItem({
-                  ...product,
-                  qty: qty,
-                  color: selectedColor,
-                  size: selectedSize,
-                })
-              }
-              className="flex gap-3 w-full items-center justify-center border border-transparent shadow bg-purple-500 px-8 py-3 text-base font-medium text-white hover:bg-black focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:outline-hidden"
+              onClick={handleAddToCart}
+              disabled={product.stock < 1}
+              className={`flex gap-3 w-full items-center justify-center border border-transparent shadow px-8 py-3 text-base font-medium text-white focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:outline-hiddenproduct.stock < 1
+                ${product.stock < 1 ? "cursor-not-allowed bg-stone-400"
+                : "cursor-pointer bg-purple-500 hover:bg-black"
+            }`}
             >
               Add to bag <IoBagAdd />
             </button>
           )}
         </div>
       </form>
+      {showError && (
+          <p className="text-red-500 mt-2">
+            Please select {requiresSize && !selectedSize ? "a size " : ""}
+            {requiresSize && requiresColor && !selectedSize && !selectedColor
+              ? " and "
+              : ""}
+            {requiresColor && !selectedColor ? "a color " : ""}
+            before adding to cart.
+          </p>
+        )}
     </section>
   );
 }

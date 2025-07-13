@@ -32,7 +32,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-, "src/app/ui/component/search_bar.js", "src/app/ui/component/search/search_overlay.tsx"  ],
+, "src/app/ui/component/search_bar.js", "src/app/ui/component/search/search_overlay.tsx", "src/app/(pages)/shop/page.tsx"  ],
   "exclude": [
     "node_modules"
   ]

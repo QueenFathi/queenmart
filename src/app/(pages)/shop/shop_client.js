@@ -1,40 +1,30 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useState } from "react";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { HiMenuAlt2 } from "react-icons/hi";
 import ProductCard from "@/app/ui/component/global/product_card";
 import Header from "@/app/ui/component/global/header";
 import ShopFilterSidebar from "@/app/ui/component/shop/shop_filter_sidebar";
 import SmallProductCard from "@/app/ui/component/global/small_product_card";
 
-export default function ShopClient({ products }) {
+export default function ShopClient({ products, filteredProducts }) {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
   const [openBar, setOpenBar] = useState(false);
-  const [sortOption, setSortOption] = useState("default");
 
-  const getDiscountedPrice = (product) => {
-    if (product.discount) {
-      return product.price - (product.price * product.discount) / 100;
-    }
-    return product.price;
+  const handleSortChange = (e) => {
+    const selectedSort = e.target.value;
+    const params = new URLSearchParams(searchParams);
+
+    if (selectedSort === "default") params.delete("sortby");
+    else params.set("sortby", selectedSort);
+    // Reset to page 1 when sorting changes
+    // params.set("page", "1");
+
+    router.push(`${pathname}?${params.toString()}`);
   };
-  const sortedProducts = useMemo(() => {
-    return [...products].sort((a, b) => {
-      const priceA = getDiscountedPrice(a);
-      const priceB = getDiscountedPrice(b);
-      switch (sortOption) {
-        case "bestRatings":
-          return b.rating - a.rating;
-        case "popularity":
-          return b.reviewcount - a.reviewcount;
-        case "priceLowToHigh":
-          return priceA - priceB;
-        case "priceHighToLow":
-          return priceB - priceA;
-        default:
-          return 0;
-      }
-    });
-  }, [products, sortOption]);
 
   const popularProducts = products
     .slice()
@@ -65,14 +55,15 @@ export default function ShopClient({ products }) {
             </button>
             <form>
               <select
-                onChange={(e) => setSortOption(e.target.value)}
+                defaultValue={searchParams.get("sortby") || "default"}
+                onChange={handleSortChange}
                 className="mx-3 text-sm md:text-base hover:bg-purple-400 hover:text-white px-4 py-2"
               >
                 <option value="default">Default</option>
-                <option value="bestRatings">Best Ratings</option>
+                <option value="best_ratings">Best Ratings</option>
                 <option value="popularity">By Popularity</option>
-                <option value="priceLowToHigh">Price: low to high</option>
-                <option value="priceHighToLow">Price: high to low</option>
+                <option value="price_asc">Price: low to high</option>
+                <option value="price_desc">Price: high to low</option>
               </select>
             </form>
           </div>
@@ -81,7 +72,7 @@ export default function ShopClient({ products }) {
               ? [...Array(12)].map((_, index) => (
                   <ProductCardSkeleton key={index} />
                 )) */}
-            {sortedProducts.map((product) => (
+            {filteredProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
           </div>

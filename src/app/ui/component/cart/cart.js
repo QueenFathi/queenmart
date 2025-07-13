@@ -2,6 +2,7 @@ import Link from "next/link";
 import CartItem from "./cart_item";
 import { IoCloseOutline } from "react-icons/io5";
 import { useCart } from "@/app/context/cart/cart_provider";
+import { formatMoney } from "../Util/utilFunc";
 
 export default function Cart({ openCart, onCloseCart }) {
   const { cart, deleteItem } = useCart();
@@ -58,27 +59,34 @@ export default function Cart({ openCart, onCloseCart }) {
           <div className="pt-10 w-full">
             <div className="flex justify-between gap-5">
               <div>
-                <p className="text-xl">Subtotal</p>
-                <p>Shipping and Taxes calculated at Checkout</p>
+                <p className="text-base sm:text-xl">Subtotal</p>
+                <p className="text-sm sm:text-base">
+                  Shipping and Taxes calculated at Checkout
+                </p>
               </div>
-              <p className="text-xl font-semibold"># {subtotal}</p>
+              <p className="text-xl font-semibold"># {formatMoney(subtotal)}</p>
             </div>
-            <div className="py-3 space-y-3">
+            <div className="py-3">
               <Link href="/bag">
                 <button
                   onClick={onCloseCart}
-                  className="w-full border border-purple-500 hover:bg-black hover:text-white py-3 text-lg"
+                  className="w-full border border-purple-500 hover:bg-black hover:text-white py-2 sm:py-3 text-base"
                 >
                   {" "}
                   View Bag
                 </button>
               </Link>
-              <button className="w-full border border-purple-500 bg-purple-500 hover:bg-black text-white py-3 text-lg">
-                {" "}
-                Checkout
-              </button>
+              {cart.length > 0 && (
+                <Link href="/checkout">
+                  <button
+                  onClick={onCloseCart} className="mt-3 w-full border border-purple-500 bg-purple-500 hover:bg-black text-white py-2 sm:py-3 text-base">
+                    {" "}
+                    Checkout
+                  </button>
+                </Link>
+              )}
             </div>
-            <p className="text-center">
+            <p className="text-center" onClick={onCloseCart}>
               or{" "}
               <Link href="/shop" className="text-purple-500 hover:text-black">
                 {" "}

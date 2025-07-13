@@ -1,6 +1,7 @@
 import Link from "next/link";
 import AddOrRemoveQuantity from "../global/add_or_remove_quantity";
 import Image from "next/image";
+import { formatMoney } from "../Util/utilFunc";
 
 export default function CartCard({ item, addOne, removeItem, deleteItem }) {
   const itemLink = `/shop/${encodeURIComponent(item.id)}`;
@@ -17,19 +18,19 @@ export default function CartCard({ item, addOne, removeItem, deleteItem }) {
           />
           <div className="flex flex-1 flex-col">
             <div className="flex justify-between py-2">
-              <h1 className="text-lg md:text-2xl text-stone-500">
+              <h1 className="text-sm sm:text-lg md:text-2xl text-stone-500">
                 {item.name}
               </h1>
               {item.discount > 0 ? (
-                <p className="text-xl md:text-2xl font-semibold">
+                <p className="text-lg md:text-xl font-semibold">
                   <span className="line-through font-normal text-xs sm:text-sm text-stone-500">
-                    #{item.price}
+                    #{formatMoney(item.price)}
                   </span>{" "}
-                  #{item.price - (item.price * item.discount) / 100}
+                  #{formatMoney(item.price - (item.price * item.discount) / 100)}
                 </p>
               ) : (
-                <p className="text-xl md:text-2xl font-semibold">
-                  #{item.price}
+                <p className="text-lg md:text-xl font-semibold">
+                  #{formatMoney(item.price)}
                 </p>
               )}
             </div>

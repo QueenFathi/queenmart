@@ -1,69 +1,48 @@
-"use client";
+import Slider from "rc-slider";
+import "rc-slider/assets/index.css";
 
-import { useState } from "react";
-
-export default function PriceFilter() {
-  const [minPrice, setMinPrice] = useState(100);
-  const [maxPrice, setMaxPrice] = useState(17605210);
-
-  const handleMinChange = (e) => {
-    const value = Number(e.target.value);
-    setMinPrice(value < 0 ? 0 : value);
+export default function PriceFilter({ priceRange, setPriceRange }) {
+const handleSliderChange = (values) => {
+    setPriceRange(values);
   };
 
-  const handleMaxChange = (e) => {
-    const value = Number(e.target.value);
-    setMaxPrice(value < minPrice ? minPrice : value);
-  };
-
-  const handleApply = () => {
-    console.log(`Applied Price Range: ₦${minPrice} - ₦${maxPrice}`);
+  const handleInputChange = (index, value) => {
+    const newRange = [...priceRange];
+    newRange[index] = Number(value);
+    setPriceRange(newRange);
   };
 
   return (
     <div className="w-full mx-auto">
-      <div className="flex justify-between items-center mb-4">
-        <h3 className="text-sm font-medium text-gray-700">PRICE (₦)</h3>
-        <button
-          onClick={handleApply}
-          className="bg-purple-500 text-white hover:bg-black font-medium hover:underline border px-5 py-1"
-        >
-          Apply
-        </button>
-      </div>
-
-      <div className="relative my-4">
-        <input
-          type="range"
-          min="0"
-          max="10000"
-          value={minPrice}
-          onChange={handleMinChange}
-          className="w-full accent-purple-500"
-        />
-        <input
-          type="range"
-          min="0"
-          max="100000"
-          value={maxPrice}
-          onChange={handleMaxChange}
-          className="w-full accent-purple-500 -mt-2"
-        />
-      </div>
-
-      <div className="flex items-center justify-between gap-2">
+      <Slider
+        range
+        min={100}
+        max={200000}
+        step={100}
+        value={priceRange}
+        onChange={handleSliderChange}
+        trackStyle={[{ backgroundColor: "#d096ba", height: 5 }]}
+        handleStyle={[
+          { borderColor: "#d096ba", height: 15, width: 15, marginTop: -6, backgroundColor: "#d096ba" },
+          { borderColor: "#d096ba", height: 15, width: 15, marginTop: -6, backgroundColor: "#d096ba" }
+        ]}
+        railStyle={{ backgroundColor: "#e5e7eb", height: 4 }}
+      />
+      <div className="flex items-center justify-between gap-2 mt-4">
         <input
           type="number"
-          value={minPrice}
-          onChange={handleMinChange}
-          className="w-1/2 border rounded-md px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+          value={priceRange[0]}
+          readOnly
+          onChange={(e) => handleInputChange(0, e.target.value)}
+          className="w-1/2 border rounded-md px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
         />
         <span className="mx-2 text-gray-500">-</span>
         <input
           type="number"
-          value={maxPrice}
-          onChange={handleMaxChange}
-          className="w-1/2 border rounded-md px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+          value={priceRange[1]}
+          readOnly
+          onChange={(e) => handleInputChange(1, e.target.value)}
+          className="w-1/2 border px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
         />
       </div>
     </div>

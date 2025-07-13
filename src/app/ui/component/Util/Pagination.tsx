@@ -1,6 +1,5 @@
 // import { useRouter } from "next/router";
-// import NextArrow from "../../public/icons/NextArrow";
-// import PrevArrow from "../../public/icons/PrevArrow";
+// import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/outline';
 
 // type Props = {
 //   lastPage: number;
@@ -73,7 +72,7 @@
 //                 : "cursor-pointer"
 //             } focus:outline-none flex justify-center items-center h-10 w-16 px-3 border mx-1 hover:bg-gray500 hover:text-gray100`}
 //           >
-//             <PrevArrow />
+//             <ArrowLeftIcon />
 //           </button>
 //         </li>
 //         {(midPageNumbers || endPageNumbers) && (
@@ -122,7 +121,7 @@
 //                 : "cursor-pointer"
 //             } focus:outline-none flex justify-center items-center h-10 w-16 px-3 border mx-1 hover:bg-gray500 hover:text-gray100`}
 //           >
-//             <NextArrow />
+//             <ArrowRightIcon />
 //           </button>
 //         </li>
 //       </ul>

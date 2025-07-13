@@ -5,7 +5,7 @@ import { useState } from "react";
 import Header from "@/app/ui/component/global/header";
 import { useCart } from "@/app/context/cart/cart_provider";
 import { useWishlist } from "@/app/context/wishlist/wishlist_provider";
-import { roundDecimal } from "@/app/ui/component/Util/utilFunc";
+import { formatMoney, roundDecimal } from "@/app/ui/component/Util/utilFunc";
 import CartCard from "@/app/ui/component/cart/cart_page_item";
 import ProductCard from "@/app/ui/component/global/product_card";
 
@@ -88,10 +88,10 @@ export default function Bag() {
             {cart.length >= 1 && (
               <div className="h-full w-full lg:w-4/12">
                 <div className="border border-black divide-y divide-gray-500 p-6">
-                  <h2 className="text-xl mb-3">Bag Totals</h2>
+                  <h2 className="text-lg sm:text-xl mb-3">Bag Totals</h2>
                   <div className="flex justify-between py-2">
                     <span className="uppercase">Subtotal</span>
-                    <span># {roundDecimal(subtotal)}</span>
+                    <span># {formatMoney(roundDecimal(subtotal))}</span>
                   </div>
                   <div className="py-3">
                     <span className="uppercase">Delivery</span>
@@ -126,7 +126,7 @@ export default function Bag() {
                             Within Ibadan
                           </label>
                         </div>
-                        <span># 2000</span>
+                        <span># {formatMoney(2000)}</span>
                       </div>
                       <div className="flex justify-between">
                         <div className="space-x-2">
@@ -142,21 +142,21 @@ export default function Bag() {
                             Other Cities
                           </label>
                         </div>
-                        <span># 7000</span>
+                        <span># {formatMoney(7000)}</span>
                       </div>
                     </div>
                   </div>
                   <div className="flex justify-between py-3">
                     <span>Grand Total </span>
-                    <span># {roundDecimal(subtotal + deliveryFee)}</span>
+                    <span># {formatMoney(roundDecimal(subtotal + deliveryFee))}</span>
                   </div>
+                  <Link href="/checkout">
                   <button
                     className="w-full bg-purple-500 text-white hover:bg-black py-2 sm:py-4 font-medium"
-                    onClick={() => router.push(`/checkout`)}
-                    disabled={cart.length < 1 ? true : false}
                   >
                     Proceed to Checkout
-                  </button>
+                    </button>
+                  </Link>
                 </div>
               </div>
             )}

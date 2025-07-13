@@ -2,6 +2,10 @@ import { sql } from '@vercel/postgres';
 import {
   Product,
 } from './types'
+import { Pool } from "pg";
+const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+
+
 export async function getAllProducts() {
   try {
     const data = await sql<Product>`SELECT * FROM products`;
@@ -43,5 +47,60 @@ export async function fetchSearchedProducts(
     throw new Error('Failed to fetch searched products.');
   }
 }
+
+export async function fetchFilteredProducts({
+  category,
+  price,
+  colors,
+  sizes,
+  sortby
+}: {
+  category?: string;
+  price?: string;
+  colors?: string;
+  sizes?: string;
+  sortby?: string;
+}) {
+  let query = "SELECT * FROM products WHERE true";
+
+  if (category) {
+    query += ` AND categoryname ILIKE '${category}'`;
+  }
+
+  if (price) {
+    const [min, max] = price.split("-").map(Number);
+    query += ` AND (price - (price * (discount / 100))) BETWEEN ${min} AND ${max}`;
+  }
+
+  if (colors) {
+    const colorString = colors.split(',').map(c => `'${c.trim()}'`).join(', ');
+    query += ` AND EXISTS (
+      SELECT 1
+      FROM jsonb_array_elements(colors) AS color
+      WHERE color->>'name' IN (${colorString}))`;
+  }
+
+  if (sizes) {
+    const sizeString = sizes.split(',').map(c => `'${c.trim()}'`).join(', ');
+    query += ` AND EXISTS (
+      SELECT 1
+      FROM jsonb_array_elements(sizes) AS size
+      WHERE size->>'name' IN (${sizeString}))`;
+  }
+
+  if (sortby === "price_asc") {
+    query += ` ORDER BY (price - (price * (discount / 100))) ASC`;
+  } else if (sortby === "price_desc") {
+    query += ` ORDER BY (price - (price * (discount / 100))) DESC`;
+  } else if (sortby === "best_ratings") {
+    query += ` ORDER BY rating DESC`;
+  } else if (sortby === "popularity") {
+    query += ` ORDER BY reviewcount DESC`;
+  }
+
+  const result = await pool.query(query);
+  return result.rows;
+}
+
 
 
