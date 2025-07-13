@@ -10,18 +10,20 @@ export default async function ProductDetail(props: {
     colors?: string;
     sizes?: string;
     sortby?: string;
+    filterbydiscount?: string;
   }>;
 }) {
   const products = await getAllProducts();
   const searchParams = await props.searchParams;
-  const { category, price, colors, sizes, sortby } = searchParams;
+  const { category, price, colors, sizes, sortby, filterbydiscount } = searchParams;
 
   const filteredProducts = await fetchFilteredProducts({
     category,
     price,
     colors,
     sizes,
-    sortby
+    sortby, 
+    filterbydiscount,
   });
 
   return (

@@ -53,13 +53,15 @@ export async function fetchFilteredProducts({
   price,
   colors,
   sizes,
-  sortby
+  sortby,
+  filterbydiscount
 }: {
   category?: string;
   price?: string;
   colors?: string;
   sizes?: string;
   sortby?: string;
+  filterbydiscount?: string;
 }) {
   let query = "SELECT * FROM products WHERE true";
 
@@ -86,6 +88,9 @@ export async function fetchFilteredProducts({
       SELECT 1
       FROM jsonb_array_elements(sizes) AS size
       WHERE size->>'name' IN (${sizeString}))`;
+  }
+  if (filterbydiscount) {
+    query += ` AND discount > 0`;
   }
 
   if (sortby === "price_asc") {

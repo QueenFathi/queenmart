@@ -42,7 +42,7 @@ export default function ShopClient({ products, filteredProducts }) {
         <Header title={"Shop"} />
         <div className="text-center py-5 border-b border-stone-300">
           <h1 className="text-stone-700">
-            Showing 1-12 of {products && products.length} results
+            Showing 1-12 of {filteredProducts && filteredProducts.length} results
           </h1>
         </div>
         <div className="container mx-auto px-2">
@@ -76,6 +76,13 @@ export default function ShopClient({ products, filteredProducts }) {
               <ProductCard key={product.id} product={product} />
             ))}
           </div>
+          {filteredProducts.length< 1 &&
+          <div>
+            <div className="h-40 text-center flex justify-center items-center">
+              No products
+            </div>
+          </div>
+          }
           {/* <Pagination /> */}
           <div className="grid grid-cols-1 md:grid-cols-2">
             <div>

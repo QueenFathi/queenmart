@@ -112,7 +112,7 @@ export default function Page() {
                     </div>
                 </div>
             </section>
-            <section className="container mx-auto px-2">
+            <section className="container mx-auto px-2 pt-5">
                 <div className="py-5 flex gap-2">
                     <span className="w-2 bg-purple-500"></span>
                     <h1 className="text-lg md:text-xl font-bold uppercase">
@@ -125,15 +125,15 @@ export default function Page() {
                     <button type="button" className="w-4/5 font-medium border border-stone-200 bg-white hover:bg-purple-500 hover:text-white focus:bg-purple-500 focus:text-white px-10 py-2 md:py-3 flex justify-center gap-2 items-center"><FaCcMastercard className="text-2xl" />Debit or Credit Card</button>
                 </div>
             </section>
-            <section className="container mx-auto px-2">
+            <section className="container mx-auto px-2  pt-5">
                 <div className="py-5 flex gap-2">
                     <span className="w-2 bg-purple-500"></span>
                     <h1 className="text-lg md:text-xl font-bold uppercase">
                         customer address
                     </h1>
                 </div>
-                <div className="bg-stone-50 p-3 md:p-5">
-                    <h1 className="font-medium text-lg">Fathiat Abimbola Odutayo</h1>
+                <div className="bg-stone-50 p-3 md:p-5 space-y-1">
+                    <h1 className="font-medium sm:text-lg">Fathiat Abimbola Odutayo</h1>
                     <p>10, Road 17, Agara Estate, Odo Ona Elewe, Ibadan, Oyo State, Nigeria</p>
                     <p>email123@gmail.com  +2348085671234</p>
                     <div className="flex items-center py-5">
@@ -153,32 +153,32 @@ export default function Page() {
                         <div>
                             <div className="grid grid-cols-2 gap-2 md:gap-5">
                                 <div className="flex flex-col">
-                                    <label htmlFor="name" className="cursor-pointer">
+                                    <label htmlFor="name" className="cursor-pointer text-sm sm:text-base">
                                         Full Name
                                     </label>
                                     <input type="text" id="name" placeholder="Full Name" className="p-3 bg-white border focus:outline-stone-300" />
                                 </div>
                                 <div className="flex flex-col">
-                                    <label htmlFor="email" className="cursor-pointer">
+                                    <label htmlFor="email" className="cursor-pointer text-sm sm:text-base">
                                         Email
                                     </label>
                                     <input type="number" id="email" placeholder="Email" className="p-3 bg-white border focus:outline-stone-300" />
                                 </div>
                                 <div className="flex flex-col">
-                                    <label htmlFor="phone_number" className="cursor-pointer">
+                                    <label htmlFor="phone_number" className="cursor-pointer text-sm sm:text-base">
                                         Phone Number
                                     </label>
                                     <input type="number" id="phone_number" placeholder="Phone Number" className="p-3 bg-white border focus:outline-stone-300" />
                                 </div>
                                 <div className="flex flex-col">
-                                    <label htmlFor="alternate_phone_number" className="cursor-pointer">
+                                    <label htmlFor="alternate_phone_number" className="cursor-pointer text-sm sm:text-base">
                                         Alternate Phone Number
                                     </label>
                                     <input type="number" id="alternate_phone_number" placeholder="Alternative phone number" className="p-3 bg-white border focus:outline-stone-300" />
                                 </div>
                             </div>
                             <div className="flex flex-col py-3 md:py-5">
-                                <label htmlFor="name" className="cursor-pointer">
+                                <label htmlFor="name" className="cursor-pointer text-sm sm:text-base">
                                     Address
                                 </label>
                                 <textarea id="address" className="p-3 min-h-40 bg-white border focus:outline-stone-300" placeholder="Address here..." />

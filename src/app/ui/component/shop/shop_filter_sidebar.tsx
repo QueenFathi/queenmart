@@ -18,7 +18,9 @@ export default function ShopFilterSidebar({ openBar, onClose, products }: {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedColors, setSelectedColors] = useState<string[]>([]);
   const [selectedSizes, setSelectedSizes] = useState<string[]>([]);
-  const [priceRange, setPriceRange] = useState<[number, number]>([100, 17605210]);
+  const [priceRange, setPriceRange] = useState<[number, number]>([100, 200000]);
+  const [selectedPriceRange, setSelectedPriceRange] = useState<[number, number] | null>(null);
+  const [filterDiscount, setFilterDiscount] = useState<string | null>(null)
 
   const toggleSelection = (value: string, selected: string[], setSelected: (val: string[]) => void) => {
     if (selected.includes(value)) {
@@ -34,7 +36,7 @@ export default function ShopFilterSidebar({ openBar, onClose, products }: {
     if (selectedCategory) params.set("category", selectedCategory);
     else params.delete("category");
 
-    if (priceRange) params.set("price", `${priceRange[0]}-${priceRange[1]}`);
+    if (selectedPriceRange) params.set("price", `${selectedPriceRange[0]}-${selectedPriceRange[1]}`);
     else params.delete("price");
 
     if (selectedColors.length > 0) params.set("colors", selectedColors.join(","));
@@ -42,6 +44,9 @@ export default function ShopFilterSidebar({ openBar, onClose, products }: {
 
     if (selectedSizes.length > 0) params.set("sizes", selectedSizes.join(","));
     else params.delete("sizes");
+
+    if (filterDiscount) params.set("filterbydiscount", filterDiscount);
+    else params.delete("filterbydiscount")
 
     router.push(`${pathname}?${params.toString()}`);
     onClose();
@@ -54,7 +59,7 @@ export default function ShopFilterSidebar({ openBar, onClose, products }: {
     >
       <div
         className={`${openBar ? "-translate-x-0" : "-translate-x-full"
-          } fixed transition-transform duration-500 overflow-y-auto [&::-webkit-scrollbar]:hidden scrollbar-none w-96 md:w-[30rem] h-full bg-white`}
+          } fixed transition-transform duration-500 overflow-y-auto [&::-webkit-scrollbar]:hidden scrollbar-none w-[350px] md:w-[30rem] h-full bg-white`}
       >
         <div className="fixed top-0 z-50 py-5 px-10 border-b border-stone-200 w-full">
           <button
@@ -75,12 +80,15 @@ export default function ShopFilterSidebar({ openBar, onClose, products }: {
                 onClick={() => setSelectedCategory(selectedCategory === item ? null : item)}
               >
                 <span>{item}</span>
-                <span className="border px-2 py-1 text-sm">12</span>
+                <input type="checkbox" readOnly checked={selectedCategory === item} className="ml-auto border px-2 py-1 text-sm focus:ring-black" />
               </div>
             ))}
           </div>
           <div className="mt-10">
-            <h2 className="font-semibold text-lg pb-3">FILTER BY PRICE</h2>
+            <div className="flex justify-between items-center pb-3">
+              <h2 className="font-semibold text-lg">FILTER BY PRICE</h2>
+              <button type="button" className="py-1.5 px-5 text-purple-500 text-sm hover:text-underline hover:text-black" onClick={() => setSelectedPriceRange(priceRange)}>Apply</button>
+            </div>
             <PriceFilter priceRange={priceRange} setPriceRange={setPriceRange} />
           </div>
           <div className="mt-10">
@@ -104,9 +112,7 @@ export default function ShopFilterSidebar({ openBar, onClose, products }: {
               >
                 <span className={`w-5 h-5 ${item.color}`}></span>
                 <span>{item.name}</span>
-                <span className="ml-auto text-stone-500 border px-2 py-1 text-sm">
-                  4
-                </span>
+                <input type="checkbox" readOnly checked={selectedColors.includes(item.name)} className="ml-auto border px-2 py-1 text-sm focus:ring-black" />
               </div>
             ))}
           </div>
@@ -124,11 +130,22 @@ export default function ShopFilterSidebar({ openBar, onClose, products }: {
                 }
               >
                 <span>{item}</span>
-                <span className="text-stone-500 border px-2 py-1 text-sm">
-                  12
-                </span>
+                <input type="checkbox" readOnly checked={selectedSizes.includes(item)} className="ml-auto border px-2 py-1 text-sm focus:ring-black" />
               </div>
             ))}
+          </div>
+          <div className="mt-10">
+            <h2 className="font-semibold uppercase pb-3">Show only discounted products</h2>
+            <div
+              className={`flex justify-between items-center py-1 px-1 cursor-pointer ${filterDiscount
+                ? "bg-purple-400 text-white"
+                : "hover:bg-purple-400 hover:text-white"
+                }`}
+              onClick={() => { if (!filterDiscount) setFilterDiscount("discount"); else setFilterDiscount(null); }}
+            >
+              <span>Discount</span>
+              <input type="checkbox" readOnly checked={filterDiscount === "discount"} className="ml-auto border px-2 py-1 text-sm focus:ring-black" />
+            </div>
           </div>
           <div className="mt-10 flex justify-end">
             <button

@@ -1,7 +1,7 @@
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 
-export default function PriceFilter({ priceRange, setPriceRange }) {
+export default function PriceFilter({priceRange, setPriceRange}) {
 const handleSliderChange = (values) => {
     setPriceRange(values);
   };
@@ -42,7 +42,7 @@ const handleSliderChange = (values) => {
           value={priceRange[1]}
           readOnly
           onChange={(e) => handleInputChange(1, e.target.value)}
-          className="w-1/2 border px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+          className="w-1/2 border px-2 py-1 text-sm t focus:outline-none focus:ring-2 focus:ring-orange-400"
         />
       </div>
     </div>

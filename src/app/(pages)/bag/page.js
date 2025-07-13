@@ -146,7 +146,7 @@ export default function Bag() {
                       </div>
                     </div>
                   </div>
-                  <div className="flex justify-between py-3">
+                  <div className="flex justify-between py-3 font-medium">
                     <span>Grand Total </span>
                     <span># {formatMoney(roundDecimal(subtotal + deliveryFee))}</span>
                   </div>

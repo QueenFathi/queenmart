@@ -24,7 +24,7 @@ export default function Wishlist() {
             <h1 className="text-lg md:text-xl font-semibold">
               Wishlist is empty
             </h1>
-            <p className="text-base md:text-lg">
+            <p className="text-sm sm:text-base md:text-lg">
               Browse our categories and discover our best deals!
             </p>
             <Link
