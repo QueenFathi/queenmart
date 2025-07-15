@@ -8,7 +8,6 @@ NProgress.configure({ showSpinner: false, trickleSpeed: 100 });
 
 export default function RouteProgress() {
   const pathname = usePathname();
-  const searchParams = useSearchParams();
 
   useEffect(() => {
     NProgress.start();
@@ -21,7 +20,7 @@ export default function RouteProgress() {
       clearTimeout(timer);
       NProgress.done();
     };
-  }, [pathname, searchParams]); 
+  }, [pathname]); 
 
   return null;
 }
