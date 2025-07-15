@@ -3,6 +3,8 @@ import Providers from "./providers";
 import "./globals.css";
 import Footer from "./ui/footer";
 import Navbar from "./ui/nav";
+import { Toaster } from "react-hot-toast";
+import RouteProgress from "./lib/route_progress";
 
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
@@ -23,9 +25,20 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
+        <RouteProgress />
         <Providers>
           <Navbar />
           {children}
+          <Toaster
+            position="top-right"
+            toastOptions={{
+              duration: 3000,
+              style: {
+                background: "#333",
+                color: "#fff",
+              },
+            }}
+          />
           <Footer />
         </Providers>
       </body>

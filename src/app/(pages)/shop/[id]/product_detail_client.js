@@ -11,7 +11,7 @@ import ProductCardSkeleton from "@/app/ui/component/skeletons/product_card_skele
 import { useWishlist } from "@/app/context/wishlist/wishlist_provider";
 import { useCart } from "@/app/context/cart/cart_provider";
 import { reviews } from "@/app/lib/dummy_data";
-import { formatMoney } from "@/app/ui/component/Util/utilFunc";
+import { formatMoney } from  "@/app/lib/utils";
 
 const shippingData =
   "Note: <br /> Items will be dispatched within 24 hours after payment confirmation. <br /> Estimated delivery: 3–5 business days We use trusted carriers to ensure safe and timely delivery. <br /> Shipping may be delayed due to high demand or weather conditions. <br /> International orders may be subject to customs duties. <br /> Please allow up to 48 hours for tracking updates to appear";

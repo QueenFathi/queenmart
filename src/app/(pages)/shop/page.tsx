@@ -5,6 +5,7 @@ import SearchOverlay from "@/app/ui/component/search/search_overlay";
 export default async function ProductDetail(props: {
   searchParams?: Promise<{
     query?: string;
+    page?: string;
     category?: string;
     price?: string;
     colors?: string;
@@ -13,11 +14,13 @@ export default async function ProductDetail(props: {
     filterbydiscount?: string;
   }>;
 }) {
-  const products = await getAllProducts();
+  const Allproducts = await getAllProducts();
   const searchParams = await props.searchParams;
+  const page = Number(searchParams.page) || 1;
   const { category, price, colors, sizes, sortby, filterbydiscount } = searchParams;
 
-  const filteredProducts = await fetchFilteredProducts({
+  const { products, totalPages, total } = await fetchFilteredProducts({
+    page,
     category,
     price,
     colors,
@@ -29,7 +32,7 @@ export default async function ProductDetail(props: {
   return (
     <>
       <SearchOverlay searchParams={props.searchParams} />
-      <ShopClient products={products} filteredProducts={filteredProducts} />
+      <ShopClient products={Allproducts} filteredProducts={products} totalPages={totalPages} totalProducts={total} page={page} />
     </>
   );
 }

@@ -2,7 +2,7 @@ import Link from "next/link";
 import CartItem from "./cart_item";
 import { IoCloseOutline } from "react-icons/io5";
 import { useCart } from "@/app/context/cart/cart_provider";
-import { formatMoney } from "../Util/utilFunc";
+import { formatMoney } from  "@/app/lib/utils";
 
 export default function Cart({ openCart, onCloseCart }) {
   const { cart, deleteItem } = useCart();

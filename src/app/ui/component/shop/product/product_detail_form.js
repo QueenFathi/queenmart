@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { toast } from "react-hot-toast";
 import { IoBagAdd, IoHeart, IoHeartOutline } from "react-icons/io5";
 import { Radio, RadioGroup } from "@headlessui/react";
 import AddOrRemoveQuantity from "../../global/add_or_remove_quantity";
@@ -51,6 +52,7 @@ export default function ProductDetailForm({
       color: selectedColor,
       size: selectedSize,
     });
+    toast.success(`${product.name} added to cart!`);
     setShowError(false);
   };
 

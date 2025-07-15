@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { formatMoney } from "../Util/utilFunc";
+import { formatMoney } from  "@/app/lib/utils";
 
 export default function SmallProductCard({ product, onClick=null }) {
   const itemLink = `/shop/${encodeURIComponent(product.id)}`;

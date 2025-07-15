@@ -5,7 +5,7 @@ import { useState } from "react";
 import Header from "@/app/ui/component/global/header";
 import { useCart } from "@/app/context/cart/cart_provider";
 import { useWishlist } from "@/app/context/wishlist/wishlist_provider";
-import { formatMoney, roundDecimal } from "@/app/ui/component/Util/utilFunc";
+import { formatMoney, roundDecimal } from "@/app/lib/utils";
 import CartCard from "@/app/ui/component/cart/cart_page_item";
 import ProductCard from "@/app/ui/component/global/product_card";
 

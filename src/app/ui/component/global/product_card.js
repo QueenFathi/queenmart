@@ -12,7 +12,8 @@ import { useCart } from "@/app/context/cart/cart_provider";
 import { useWishlist } from "@/app/context/wishlist/wishlist_provider";
 import AddOrRemoveQuantity from "./add_or_remove_quantity";
 import ProductDetailForm from "@/app/ui/component/shop/product/product_detail_form";
-import { formatMoney } from "../Util/utilFunc";
+import { formatMoney } from  "@/app/lib/utils";
+import toast from "react-hot-toast";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -42,6 +43,7 @@ export default function ProductCard({ product }) {
       setOpen(true);
     } else {
       addOne(product);
+    toast.success(`${product.name} added to cart!`);
     }
   };
 

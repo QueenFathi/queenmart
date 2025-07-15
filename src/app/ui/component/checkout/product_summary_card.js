@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { formatMoney } from "../Util/utilFunc";
+import { formatMoney } from  "@/app/lib/utils";
 
 export default function ProductSummaryCard({ product }) {
   return (

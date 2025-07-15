@@ -3,7 +3,7 @@
 import { useCart } from "@/app/context/cart/cart_provider";
 import Header from "@/app/ui/component/global/header";
 import ProductSummaryCard from "@/app/ui/component/checkout/product_summary_card";
-import { roundDecimal, formatMoney } from "@/app/ui/component/Util/utilFunc";
+import { roundDecimal, formatMoney } from "@/app/lib/utils";
 import Image from "next/image";
 import { useState } from "react";
 import { FaCcMastercard, FaCreditCard } from "react-icons/fa";

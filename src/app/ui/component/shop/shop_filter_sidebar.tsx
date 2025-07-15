@@ -32,7 +32,7 @@ export default function ShopFilterSidebar({ openBar, onClose, products }: {
 
   const applyFilters = () => {
     const params = new URLSearchParams(searchParams);
-
+    params.set('page', '1');
     if (selectedCategory) params.set("category", selectedCategory);
     else params.delete("category");
 

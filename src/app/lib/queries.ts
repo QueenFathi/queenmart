@@ -54,29 +54,40 @@ export async function fetchFilteredProducts({
   colors,
   sizes,
   sortby,
-  filterbydiscount
+  filterbydiscount,
+  page = 1,
+  limit = 2,
 }: {
   category?: string;
   price?: string;
   colors?: string;
   sizes?: string;
   sortby?: string;
-  filterbydiscount?: string;
+  filterbydiscount?: string; 
+  page?: number;
+  limit?: number;
 }) {
   let query = "SELECT * FROM products WHERE true";
+  let countquery = "SELECT COUNT(*) FROM products WHERE true";
 
   if (category) {
     query += ` AND categoryname ILIKE '${category}'`;
+    countquery += ` AND categoryname ILIKE '${category}'`;
   }
 
   if (price) {
     const [min, max] = price.split("-").map(Number);
     query += ` AND (price - (price * (discount / 100))) BETWEEN ${min} AND ${max}`;
+    countquery += ` AND (price - (price * (discount / 100))) BETWEEN ${min} AND ${max}`;
   }
 
   if (colors) {
     const colorString = colors.split(',').map(c => `'${c.trim()}'`).join(', ');
     query += ` AND EXISTS (
+      SELECT 1
+      FROM jsonb_array_elements(colors) AS color
+      WHERE color->>'name' IN (${colorString}))`;
+      countquery += ` AND EXISTS (
       SELECT 1
       FROM jsonb_array_elements(colors) AS color
       WHERE color->>'name' IN (${colorString}))`;
@@ -88,9 +99,14 @@ export async function fetchFilteredProducts({
       SELECT 1
       FROM jsonb_array_elements(sizes) AS size
       WHERE size->>'name' IN (${sizeString}))`;
+      countquery += ` AND EXISTS (
+      SELECT 1
+      FROM jsonb_array_elements(sizes) AS size
+      WHERE size->>'name' IN (${sizeString}))`;
   }
   if (filterbydiscount) {
     query += ` AND discount > 0`;
+    countquery += ` AND discount > 0`;
   }
 
   if (sortby === "price_asc") {
@@ -103,8 +119,18 @@ export async function fetchFilteredProducts({
     query += ` ORDER BY reviewcount DESC`;
   }
 
-  const result = await pool.query(query);
-  return result.rows;
+  const offset = (page - 1) * limit;
+
+  const result = await pool.query(query+` LIMIT ${limit} OFFSET ${offset}`);
+  const countResult = await pool.query(countquery);
+  const totalCount = parseInt(countResult.rows[0].count, 10)
+  return {
+    products: result.rows,
+    total: totalCount,
+    page,
+    totalPages: Math.ceil(totalCount / limit),
+  };
+
 }
 
 

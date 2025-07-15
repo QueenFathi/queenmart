@@ -1,7 +1,7 @@
 import Link from "next/link";
 import AddOrRemoveQuantity from "../global/add_or_remove_quantity";
 import Image from "next/image";
-import { formatMoney } from "../Util/utilFunc";
+import { formatMoney } from  "@/app/lib/utils";
 
 export default function CartCard({ item, addOne, removeItem, deleteItem }) {
   const itemLink = `/shop/${encodeURIComponent(item.id)}`;

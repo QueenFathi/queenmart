@@ -3,12 +3,13 @@
 import { useState } from "react";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { HiMenuAlt2 } from "react-icons/hi";
+import Pagination from "@/app/ui/component/shop/pagination";
 import ProductCard from "@/app/ui/component/global/product_card";
 import Header from "@/app/ui/component/global/header";
 import ShopFilterSidebar from "@/app/ui/component/shop/shop_filter_sidebar";
 import SmallProductCard from "@/app/ui/component/global/small_product_card";
 
-export default function ShopClient({ products, filteredProducts }) {
+export default function ShopClient({ products, filteredProducts, totalPages, totalProducts, page }) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -20,8 +21,6 @@ export default function ShopClient({ products, filteredProducts }) {
 
     if (selectedSort === "default") params.delete("sortby");
     else params.set("sortby", selectedSort);
-    // Reset to page 1 when sorting changes
-    // params.set("page", "1");
 
     router.push(`${pathname}?${params.toString()}`);
   };
@@ -42,7 +41,7 @@ export default function ShopClient({ products, filteredProducts }) {
         <Header title={"Shop"} />
         <div className="text-center py-5 border-b border-stone-300">
           <h1 className="text-stone-700">
-            Showing 1-12 of {filteredProducts && filteredProducts.length} results
+            Showing {filteredProducts && 1+((page-1)*8)} - {filteredProducts && ((page-1)*8)+filteredProducts.length} of {totalProducts} results
           </h1>
         </div>
         <div className="container mx-auto px-2">
@@ -83,7 +82,7 @@ export default function ShopClient({ products, filteredProducts }) {
             </div>
           </div>
           }
-          {/* <Pagination /> */}
+          <Pagination totalPages={totalPages} />
           <div className="grid grid-cols-1 md:grid-cols-2">
             <div>
               <div className="py-10">
