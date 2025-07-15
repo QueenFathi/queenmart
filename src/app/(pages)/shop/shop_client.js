@@ -107,10 +107,6 @@ export default function ShopClient({ products, filteredProducts, totalPages, tot
                 </h1>
               </div>
               <div className=" grid grid-row gap-5">
-                {/* {loading
-                  ? [...Array(3)].map((_, index) => (
-                      <SmallProductCardSkeleton key={index} />
-                    )) */}
                 {products.slice(0, 3).map((product) => (
                   <SmallProductCard key={product.id} product={product} />
                 ))}
