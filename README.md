@@ -1,8 +1,17 @@
-## QUEENMART
+# QUEENMART 🛍️
 
 Frontend e-commerce website
 
-# [Live Demo](https://queenmart.vercel.app)
+Live Demo: [queenmart.vercel.app](https://queenmart.vercel.app)
+
+## 🚀 Features
+- 🔍 Product listings with search and filters
+- 🛒 Shopping cart with quantity management
+- 🔐 User authentication & secure checkout
+- 📱 Responsive design — mobile-friendly across devices
+- ⚡ Fast performance (SSR / SSG via Vercel)
+
+## 🧱 Tech Stack
 
 - Framework: [Next.js](https://nextjs.org)
 - Serveless Database: Neon
@@ -15,7 +24,7 @@ Homepage
 Products page
 <img width="1887" height="878" alt="image" src="https://github.com/user-attachments/assets/57dab4b8-8439-47c3-87d7-a886f41f4da3" />
 
-# Environment Variables
+## Environment Variables
 To run this project, you will need to add the following environment variables to your .env file
 
 ```bash
@@ -48,11 +57,12 @@ NEXT_PUBLIC_STACK_PUBLISHABLE_CLIENT_KEY=pck_qgk5rcakmn1nxhyt3f5kpyk4wrdf4etjmxb
 STACK_SECRET_SERVER_KEY=ssk_e4sqjg8vnxf4a1wh9aynzjz6gnyw28cqehz8zx8e0540r
 ```
 
-# Run Locally
+## Installation & Run Locally
 
 Clone the project:
 ```bash
-git clone 
+git clone https://github.com/QueenFathi/queenmart.git
+
 ```
 
 Go to the project directory
