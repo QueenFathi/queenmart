@@ -19,7 +19,7 @@ export default function Pagination({ totalPages }: { totalPages: number }) {
   };
 
   return (
-    <>
+    <div className="mt-10 flex justify-center">
       <div className="inline-flex">
         <PaginationArrow
           direction="left"
@@ -54,7 +54,7 @@ export default function Pagination({ totalPages }: { totalPages: number }) {
           isDisabled={currentPage >= totalPages}
         />
       </div>
-    </>
+    </div>
   );
 }
 

@@ -56,7 +56,7 @@ export async function fetchFilteredProducts({
   sortby,
   filterbydiscount,
   page = 1,
-  limit = 2,
+  limit = 12,
 }: {
   category?: string;
   price?: string;

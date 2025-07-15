@@ -41,7 +41,7 @@ export default function ShopClient({ products, filteredProducts, totalPages, tot
         <Header title={"Shop"} />
         <div className="text-center py-5 border-b border-stone-300">
           <h1 className="text-stone-700">
-            Showing {filteredProducts && 1+((page-1)*8)} - {filteredProducts && ((page-1)*8)+filteredProducts.length} of {totalProducts} results
+            Showing {filteredProducts && 1+((page-1)*12)} - {filteredProducts && ((page-1)*12)+filteredProducts.length} of {totalProducts} results
           </h1>
         </div>
         <div className="container mx-auto px-2">
