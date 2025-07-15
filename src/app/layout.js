@@ -4,7 +4,7 @@ import "./globals.css";
 import Footer from "./ui/footer";
 import Navbar from "./ui/nav";
 import { Toaster } from "react-hot-toast";
-// import RouteProgress from "./lib/route_progress";
+import RouteProgress from "./lib/route_progress";
 
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
@@ -30,7 +30,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        {/* <RouteProgress /> */}
+        <RouteProgress />
         <Providers>
           <Navbar />
           {children}
