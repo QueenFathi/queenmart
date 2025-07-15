@@ -13,15 +13,18 @@ Live Demo: [queenmart.vercel.app](https://queenmart.vercel.app)
 
 ## 🧱 Tech Stack
 
-- Framework: [Next.js](https://nextjs.org)
-- Serveless Database: Neon
-- Deployment: [Vercel](https://vercel.com)
-- Styling: [Tailwind CSS](https://tailwindcss.com)
+| Category             | Tools & Libraries                          |
+|----------------------|--------------------------------------------|
+| Framework            | [Next.js](https://nextjs.org), [React](https://react.dev/)       |
+| Styling              | [Tailwind CSS](https://tailwindcss.com)    |
+| Serverless Database  | Neon (PostgreSQL)                          |
+| Deployment           | Vercel(https://vercel.com)                 |
 
-Homepage
+
+### Homepage
 <img width="1886" height="860" alt="image" src="https://github.com/user-attachments/assets/3c03f876-a51a-4486-ad88-2b0bcf314549" />
 
-Products page
+### Products page
 <img width="1887" height="878" alt="image" src="https://github.com/user-attachments/assets/57dab4b8-8439-47c3-87d7-a886f41f4da3" />
 
 ## Environment Variables
